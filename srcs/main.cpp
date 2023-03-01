@@ -6,16 +6,19 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:24:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/02/28 19:32:59 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:27:56 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/irc.hpp"
+#include "../include/Irc.hpp"
 
 int main(int ac, char **av)
 {
 	if (ac != 3)
 		return (1);
-	
+
+	av=av;
+	Server irc(2222, "test");
+
 	return 0;
 }
