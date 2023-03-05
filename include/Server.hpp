@@ -6,11 +6,18 @@
 class Server
 {
 	private :
-		int			_port;
-		std::string	_password;
+		char					*_cport;
+		int						_port;
+		std::string				_password;
+		int						_sd;
+		std::vector<pollfd> 	_pollfd;
+		int						_nb_fd;
+	
 	public :
-		Server(int port, std::string pswd);
+		Server(char *cport, std::string pswd);
 		~Server();
+		void	init();
+		// start();
 		
 };
 

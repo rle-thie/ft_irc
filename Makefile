@@ -6,7 +6,7 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 08:42:57 by arudy             #+#    #+#              #
-#    Updated: 2023/03/01 15:28:14 by rle-thie         ###   ########.fr        #
+#    Updated: 2023/03/05 16:07:40 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,9 @@ fclean: clean
 	${RM} ${NAME} ${DIR_OBJS}
 
 re: fclean all
+
+ree: re
+	./ircserv 2222 abcd
 
 rc: re
 	${RM} ${OBJS} && clear && ./ircserv 6667 lol
