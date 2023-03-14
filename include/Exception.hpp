@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:54:43 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/03/05 17:26:17 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:00:07 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ class Exception
 			const char	*what() const throw()
 			{
 				return "cant listen";
+			}
+		};
+
+		class err : public std::exception
+		{
+			public :
+				err(const char *msg);
+			private :
+				const char	*_msg;
+			const char	*what() const throw()
+			{
+				return _msg;
 			}
 		};
 

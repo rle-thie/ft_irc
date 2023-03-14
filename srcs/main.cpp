@@ -6,11 +6,19 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:24:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/03/05 16:00:46 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:01:05 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Irc.hpp"
+
+bool run = true;
+
+void	signal_checker(int sig)
+{
+	if (sig == SIGINT || sig == SIGQUIT)
+		run = false;
+}
 
 int	ft_error(std::string str)
 {
@@ -39,19 +47,35 @@ int	parser(int ac, char **av)
 
 int main(int ac, char **av)
 {
+
 	if (parser(ac, av))
 		return (1);
-	Server irc(av[1], av[2]);
+	Server *irc = new Server(av[1], av[2]);
 	try
 	{
-		irc.init();
+		irc->init();
 	}
 	catch(const std::exception& e)
 	{
+		std::cerr << "Error\nServer cannot init" << '\n';
 		std::cerr << e.what() << '\n';
-		
+		delete irc;
 	}
-	
-
+	while (run == true)
+	{
+		try
+		{
+			signal(SIGINT, signal_checker);
+			signal(SIGQUIT, signal_checker);
+			irc->start();
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+			delete irc;
+			return (1);
+		}
+	}
+	delete irc;
 	return 0;
 }

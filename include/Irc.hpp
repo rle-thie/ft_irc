@@ -10,11 +10,16 @@
 #include <fcntl.h>
 #include <poll.h>
 #include <vector>
+#include <signal.h>
+#include <cerrno>
+#include <arpa/inet.h>
+#include <map>
 
 #include <netdb.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include "User.hpp"
 #include "Server.hpp"
 #include "Exception.hpp"
 
