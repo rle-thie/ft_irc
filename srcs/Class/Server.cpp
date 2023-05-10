@@ -96,8 +96,8 @@ void	Server::start(void)
 	std::vector<pollfd>::iterator end_vector = _pollfd.end();
 	for (std::vector<pollfd>::iterator iter = _pollfd.begin() + 1; iter != end_vector; iter++)
 	{
-		if ((*iter).revents == POLLIN)
-			_trait_requests(*iter);
+		// if ((*iter).revents == POLLIN)
+			// _trait_requests(*iter);
 	}
 }
 
@@ -118,11 +118,11 @@ void	Server::_convert_new()
 	_nb_fd++;
 }
 
-int	Server::_trait_requests(pollfd pfd)
-{
-	int ret;
-	int lines;
-	int status;
+// int	Server::_trait_requests(pollfd pfd)
+// {
+	// int ret;
+	// int lines;
+	// int status;
 
 	// if ((ret = _recvAll(pfd)))
 	// 	return ret;
@@ -143,7 +143,7 @@ int	Server::_trait_requests(pollfd pfd)
 	// 	}
 	// }
 	// return 0;
-}
+// }
 
 Exception::err::err(const char *msg) : _msg(msg)
 {
