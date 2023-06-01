@@ -1,6 +1,8 @@
 #ifndef IRC_HPP
 #define IRC_HPP
 
+#define BUFFER_SIZE 4096
+
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -22,5 +24,6 @@
 #include "User.hpp"
 #include "Server.hpp"
 #include "Exception.hpp"
+#include "Display.hpp"
 
 #endif
