@@ -4,6 +4,7 @@
 #define BUFFER_SIZE 4096
 
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <cstring>
 #include <cstdlib>

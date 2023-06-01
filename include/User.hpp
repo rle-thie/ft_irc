@@ -7,16 +7,25 @@ class User
 {
 	private :
 		int			_sd;
-		std::string	_pseudo;
-		std::string	_addr;
+		std::string	_user_name;
+		bool		_first_try;
+		std::string	_nick;
+		std::string	_host_name;
+		bool		_cap;
 	
 	public :
 		User(int socket_desc);
+		std::string const	getClient() const;
+		bool const 			&getFirstTry() const;
+		std::string const	getNick() const;
+		std::string const	&getUserName() const;
+		std::string const	&getHostName() const;
+		bool const			&getCap() const;
 		~User();
 
 	// private :
 	// 	void _convert_new();
-		
+
 };
 
 #endif

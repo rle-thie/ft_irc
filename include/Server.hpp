@@ -3,6 +3,8 @@
 
 #include "Irc.hpp"
 
+typedef int (Server::*commands)(User*, std::string);
+
 class Server
 {
 	private :
@@ -15,10 +17,12 @@ class Server
 		std::map<int, User*>								_user_dict;
 		std::string											_buff;
 		std::vector<std::pair<std::string, std::string> >	_recvs;
+		std::map<const std::string, commands>				_commands;
 	
 	public :
 		Server(char *cport, std::string pswd);
 		~Server();
+		void	clear();
 		void	init();
 		void	start();
 	
@@ -30,7 +34,7 @@ class Server
 		int		_manageCmd(pollfd pfd, std::pair<std::string, std::string> cmd);
 		int		_sendError(User *user, std::string err);
 		int		_sendAll(int fd, const char *buf, size_t len, int flags);
-		void	clear();
+		int		_disconnectUser(User *user, int ret);
 };
 
 #endif

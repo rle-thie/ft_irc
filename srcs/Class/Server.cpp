@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Server.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
+/*   Updated: 2023/06/02 00:23:52 by rle-thie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/Irc.hpp"
 
 extern bool run;
@@ -103,6 +115,43 @@ void	Server::start(void)
 	}
 }
 
+int Server::_disconnectUser(User *user, int ret)
+{
+	std::string disconnection(" has been disconnected!");
+	std::string delimiter("================================");
+
+	// https://ircv3.net/specs/extensions/capability-negotiation.html#:~:text=Capability%20Negotiation%20means%20that%20client,new%20features%20and%20vice%2Dversa.
+	if (!user->getCap())
+		_sendError(user, ERR_NOCAP);
+	else if (user->getTriedToAuth() && !user->getAuth())
+		_sendError(user, ERR_PASSWDMISMATCH(user->getClient(), user->getNick()));
+	else if (user->getTriedToAuth() && user->getNick() == "")
+		_sendError(user, ERR_NONICK);
+	else if (user->getTriedToAuth() && user->getUserName() == "")
+		_sendError(user, ERR_NOUSER);
+	else if (user->getAuth()) {
+		disconnection = " has left the server!";
+		delimiter = "==============================";
+	}
+	else if (!user->getTriedToAuth())
+		_sendError(user, ERR_NOPASS);
+	std::cout << "=========" << delimiter << std::endl;
+	std::cout << "[ircserv] Client " << user->getUserSd() << disconnection << std::endl;
+	std::cout << "=========" << delimiter << std::endl;
+	std::vector<pollfd>::iterator it;
+	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
+		;
+	user->removeFromAll();
+	_delEmptyChans();
+	_pollfd.erase(it);
+	_user_dict.erase(user->getUserSd());
+	_recvs.clear();
+	_nb_fd--;
+	close(user->getUserSd());
+	delete user;
+	return ret;
+}
+
 // ajoute les nouvelles connections a la liste _user_dict
 void	Server::_convert_new()
 {
@@ -183,7 +232,7 @@ void Server::clear()
 	// _channels.clear();
 	for (std::map<int, User*>::iterator it = _user_dict.begin(); it != _user_dict.end(); it++)
 		delete (*it).second;
-	_users.clear();
+	_user_dict.clear();
 	for (std::vector<pollfd>::iterator it = _pollfd.begin(); it != _pollfd.end(); it++)
 		close(it->fd);
 	_pollfd.clear();
