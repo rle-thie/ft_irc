@@ -3,7 +3,7 @@
 int Server::_sendError(User *user, std::string err)
 {
 	_sendAll(user->getUserSd(), err.c_str(), err.length(), 0);
-	std::cout << DIS_ERR << user->getUserSd() << DIS_ERREND(err);
+	std::cout << "error..." << std::endl;
 	return 1;
 }
 

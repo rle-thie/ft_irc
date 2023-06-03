@@ -6,13 +6,13 @@
 #    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 08:42:57 by arudy             #+#    #+#              #
-#    Updated: 2023/05/27 20:32:30 by rle-thie         ###   ########.fr        #
+#    Updated: 2023/06/03 18:49:10 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= ircserv
 
-SRCS_CLASS = $(addprefix Class/, Server.cpp User.cpp Commands.cpp)
+SRCS_CLASS = $(addprefix Class/, Server.cpp User.cpp Commands.cpp Utils.cpp)
 
 DIR_SRCS = srcs
 

@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/03 14:35:40 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:37:30 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ User::User(int socket_desc)
 	_host_name = "";
 	_tried_to_auth = 0;
 	_auth = 0;
-	_cap = 0;
 }
 
 std::string const User::getClient() const
@@ -48,11 +47,6 @@ bool const &User::getTriedToAuth() const
 	return _tried_to_auth;
 }
 
-bool const &User::getCap() const
-{
-	return _cap;
-}
-
 bool const &User::getFirstTry() const
 {
 	return _first_try;
@@ -76,11 +70,6 @@ std::string const &User::getHostName() const
 }
 
 // setter
-
-void User::setCap(bool value)
-{
-	_cap = value;
-}
 
 User::~User()
 {

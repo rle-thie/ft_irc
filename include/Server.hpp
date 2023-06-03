@@ -3,6 +3,8 @@
 
 #include "Irc.hpp"
 
+class Server;
+
 typedef int (Server::*commands)(User*, std::string);
 
 class Server

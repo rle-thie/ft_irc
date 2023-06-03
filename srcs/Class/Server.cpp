@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/03 14:47:19 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:41:57 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,14 +271,7 @@ int Server::_fillRecvs(std::string buff)
 
 int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cmd)
 {
-	if (!user->getCap() && cmd.first == "CAP" && cmd.second[0] == 'L' && cmd.second[1] == 'S')
-		return user->setCap(true), 0;
-	else if (!user->getTriedToAuth() && cmd.first == "PASS")
-	{
-		if (!user->getCap())
-			return _disconnectUser(user, 2);
-	}
-	else if (user->getNick() == "" && cmd.first == "NICK")
+	if (user->getNick() == "" && cmd.first == "NICK")
 	{
 		if (!user->getAuth())
 			return _disconnectUser(user, 2);
