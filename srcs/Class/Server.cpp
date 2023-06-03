@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/03 18:41:57 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:58:34 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int Server::_disconnectUser(User *user, int ret)
 		// error no user info
 	if (user->getAuth())
 	{
-		disconnection = " has left the server!";
+		disconnection = " left !";
 		delimiter = "==============================";
 	}
 	// else if (!user->getTriedToAuth())
@@ -227,10 +227,6 @@ size_t Server::_recvAll(pollfd pollfd) {
 void Server::clear()
 {
 	_recvs.clear();
-	// _cmds.clear();
-	// for (std::map<std::string, Channel*>::iterator it = _channels.begin(); it != _channels.end(); it++)
-	// 	delete (*it).second;
-	// _channels.clear();
 	for (std::map<int, User*>::iterator it = _user_dict.begin(); it != _user_dict.end(); it++)
 		delete (*it).second;
 	_user_dict.clear();
