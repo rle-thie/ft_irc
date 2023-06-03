@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/02 00:23:52 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:47:19 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,28 +121,29 @@ int Server::_disconnectUser(User *user, int ret)
 	std::string delimiter("================================");
 
 	// https://ircv3.net/specs/extensions/capability-negotiation.html#:~:text=Capability%20Negotiation%20means%20that%20client,new%20features%20and%20vice%2Dversa.
-	if (!user->getCap())
-		_sendError(user, ERR_NOCAP);
-	else if (user->getTriedToAuth() && !user->getAuth())
-		_sendError(user, ERR_PASSWDMISMATCH(user->getClient(), user->getNick()));
-	else if (user->getTriedToAuth() && user->getNick() == "")
-		_sendError(user, ERR_NONICK);
-	else if (user->getTriedToAuth() && user->getUserName() == "")
-		_sendError(user, ERR_NOUSER);
-	else if (user->getAuth()) {
+	// if !cap
+	// 	error cap
+	// if (user->getTriedToAuth() && !user->getAuth())
+		// password incorrecte
+	// if (user->getTriedToAuth() && user->getNick() == "")
+		// no nick error
+	// if (user->getTriedToAuth() && user->getUserName() == "")
+		// error no user info
+	if (user->getAuth())
+	{
 		disconnection = " has left the server!";
 		delimiter = "==============================";
 	}
-	else if (!user->getTriedToAuth())
-		_sendError(user, ERR_NOPASS);
+	// else if (!user->getTriedToAuth())
+		// error no password
 	std::cout << "=========" << delimiter << std::endl;
 	std::cout << "[ircserv] Client " << user->getUserSd() << disconnection << std::endl;
 	std::cout << "=========" << delimiter << std::endl;
 	std::vector<pollfd>::iterator it;
 	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
 		;
-	user->removeFromAll();
-	_delEmptyChans();
+	// user->removeFromAll();
+	// _delEmptyChans();
 	_pollfd.erase(it);
 	_user_dict.erase(user->getUserSd());
 	_recvs.clear();
@@ -211,9 +212,9 @@ size_t Server::_recvAll(pollfd pollfd) {
 			return -1;
 		if (size == 0)
 		{
-			std::cout << "disconnect user... inprogress" << std::endl;
-			// return _disconnectUser(_users[pollfd.fd], 0);
-			// return 1;
+			// std::cout << "disconnect user... inprogress" << std::endl;
+			return _disconnectUser(_user_dict[pollfd.fd], 0);
+			return 1;
 		}
 		buffer[size] = 0;
 		_buff += buffer;
@@ -266,6 +267,30 @@ int Server::_fillRecvs(std::string buff)
 		buff.erase(begin, backr + 2);
 	}
 	return lines;
+}
+
+int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cmd)
+{
+	if (!user->getCap() && cmd.first == "CAP" && cmd.second[0] == 'L' && cmd.second[1] == 'S')
+		return user->setCap(true), 0;
+	else if (!user->getTriedToAuth() && cmd.first == "PASS")
+	{
+		if (!user->getCap())
+			return _disconnectUser(user, 2);
+	}
+	else if (user->getNick() == "" && cmd.first == "NICK")
+	{
+		if (!user->getAuth())
+			return _disconnectUser(user, 2);
+	}
+	else if (cmd.first == "USER")
+	{
+		if (user->getNick() == "")
+			return _disconnectUser(user, 2);
+	}
+	else
+		return _disconnectUser(user, 2);
+	return 0;
 }
 
 Exception::err::err(const char *msg) : _msg(msg)
