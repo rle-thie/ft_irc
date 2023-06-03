@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/03 18:58:34 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/03 19:19:30 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int Server::_disconnectUser(User *user, int ret)
 	// else if (!user->getTriedToAuth())
 		// error no password
 	std::cout << "=========" << delimiter << std::endl;
-	std::cout << "[ircserv] Client " << user->getUserSd() << disconnection << std::endl;
+	std::cout << "[IRC SERVER] User " << user->getUserSd() << disconnection << std::endl;
 	std::cout << "=========" << delimiter << std::endl;
 	std::vector<pollfd>::iterator it;
 	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
@@ -213,6 +213,7 @@ size_t Server::_recvAll(pollfd pollfd) {
 		if (size == 0)
 		{
 			// std::cout << "disconnect user... inprogress" << std::endl;
+			std::cout << "size = 0 ---> disconnect" << std::endl;
 			return _disconnectUser(_user_dict[pollfd.fd], 0);
 			return 1;
 		}
@@ -267,18 +268,26 @@ int Server::_fillRecvs(std::string buff)
 
 int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cmd)
 {
-	if (user->getNick() == "" && cmd.first == "NICK")
-	{
-		if (!user->getAuth())
-			return _disconnectUser(user, 2);
-	}
-	else if (cmd.first == "USER")
-	{
-		if (user->getNick() == "")
-			return _disconnectUser(user, 2);
-	}
-	else
-		return _disconnectUser(user, 2);
+	user=user;
+	std::cout << cmd.first << "----" << cmd.second << std::endl;
+	// if (user->getNick() == "" && cmd.first == "NICK")
+	// {
+	// 	if (!user->getAuth())
+	// 	{
+	// 		std::cout << "no nick" << std::endl;
+	// 		return _disconnectUser(user, 2);
+	// 	}
+	// }
+	// if (cmd.first == "USER")
+	// {
+	// 	if (user->getNick() == "")
+	// 	{
+	// 		std::cout << "cmd = user and no nick" << std::endl;
+	// 		return _disconnectUser(user, 2);
+	// 	}
+	// }
+	// else
+	// 	return _disconnectUser(user, 2);
 	return 0;
 }
 
