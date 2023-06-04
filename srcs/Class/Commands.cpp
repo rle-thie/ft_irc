@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:29:33 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/01 20:37:44 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 00:25:09 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,30 @@
 
 int Server::_manageCmd(pollfd pfd, std::pair<std::string, std::string> cmd)
 {
-	int ret;
-
-	if (_user_dict[pfd.fd]->getFirstTry())
-		if ((ret = _acceptConnection(_user_dict[pfd.fd], cmd)))
-			return ret;
-	if (cmd.first == "CAP")
-		return 0;
-	if (_commands.find(cmd.first) != _commands.end())
-		return (this->*_commands[cmd.first])(_user_dict[pfd.fd], cmd.second);
-	return 3;
+	if (_user_dict[pfd.fd]->getAuth() == true)
+		_acceptConnection(_user_dict[pfd.fd], cmd);
+	else if (cmd.first == "CAP")
+		return 1;
+	if (_user_dict[pfd.fd]->getAuth() == false)
+	{
+		if (cmd.first == "PASS")
+		{
+			std::cout << "Mot de passe envoye : " << cmd.second << std::endl;
+			_user_dict[pfd.fd]->setPass(cmd.second);
+		}
+		else if (cmd.first == "NICK")
+		{
+			std::cout << "Nick envoye : " << cmd.second << std::endl;
+			_user_dict[pfd.fd]->setNick(cmd.second);
+		}
+		else if (cmd.first == "USER")
+		{
+			std::cout << "User envoye : " << cmd.second << std::endl;
+			_user_dict[pfd.fd]->setUser(cmd.second);
+		}
+		_is_auth(_user_dict[pfd.fd]);
+	}
+	
+	// else if (cmd.first == "NICK")
+	return 1;
 }

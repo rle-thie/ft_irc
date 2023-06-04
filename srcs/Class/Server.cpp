@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/03 19:19:30 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/04 22:45:49 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ void	Server::start(void)
 	}
 	if (_pollfd[0].revents == POLLIN)
 	{
-		std::cout << "newuser incomming..." << std::endl;
+		// std::cout << "newuser incomming..." << std::endl;
 		_convert_new();
 	}
-	std::cout << _pollfd.size() << std::endl;
+	// std::cout << _pollfd.size() << std::endl;
 	std::vector<pollfd>::iterator end_vector = _pollfd.end();
 	for (std::vector<pollfd>::iterator iter = _pollfd.begin() + 1; iter != end_vector; iter++)
 	{
@@ -160,7 +160,7 @@ void	Server::_convert_new()
 	sockaddr_in	new_user;	//addr internet pas n'importe quoi (sockaddr)
 	socklen_t	len_sockaddr;
 
-	std::cout << "convert_new()" << std::endl;
+	// std::cout << "convert_new()" << std::endl;
 	len_sockaddr = sizeof(new_user);
 	new_fd = accept(_sd, (sockaddr *)&new_user, &len_sockaddr);
 	_user_dict.insert(std::pair<int, User*>(new_fd, new User(new_fd)));
@@ -176,25 +176,17 @@ int	Server::_trait_requests(pollfd pfd)
 {
 	int ret;
 	int lines;
-	int status;
+	// int status;
 
 	if ((ret = _recvAll(pfd)))
 		return ret;
 	_recvs.clear();
 	lines = _fillRecvs(std::string(_buff));
 	_buff.clear();
-	for (int i = 0; i < lines; i++) {
+	for (int i = 0; i < lines; i++)
+	{
 		std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
-		if ((status = _manageCmd(pfd, _recvs[i]))) {
-			if (status == 2)
-				break;
-			else if (status == 3)
-				_sendError(_user_dict[pfd.fd], ERR_UNKNOWNCOMMAND(_user_dict[pfd.fd]->getClient(), _user_dict[pfd.fd]->getNick(), _recvs[i].first));
-			else if (status == 4) {
-				run = 0;
-				break;
-			}
-		}
+		_manageCmd(pfd, _recvs[i]);
 	}
 	return 0;
 }

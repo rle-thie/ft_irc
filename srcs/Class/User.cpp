@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/03 18:37:30 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/04 23:47:34 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ User::User(int socket_desc)
 	_host_name = "";
 	_tried_to_auth = 0;
 	_auth = 0;
+	_pwd = "";
 }
 
 std::string const User::getClient() const
@@ -69,7 +70,32 @@ std::string const &User::getHostName() const
 	return _host_name;
 }
 
+std::string const &User::getPassword() const
+{
+	return _pwd;
+}
+
 // setter
+
+void	User::setPass(std::string str)
+{
+	_pwd = str;
+}
+
+void	User::setNick(std::string str)
+{
+	_nick = str;
+}
+
+void	User::setUser(std::string str)
+{
+	_user_name = str;
+}
+
+void	User::setAuth(bool str)
+{
+	_auth = str;
+}
 
 User::~User()
 {

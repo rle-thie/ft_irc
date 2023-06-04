@@ -38,6 +38,7 @@ class Server
 		int		_sendAll(int fd, const char *buf, size_t len, int flags);
 		int		_disconnectUser(User *user, int ret);
 		int		_acceptConnection(User *user, std::pair<std::string, std::string> cmd);
+		bool	_is_auth(User *usr);
 };
 
 #endif

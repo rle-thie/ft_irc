@@ -13,17 +13,25 @@ class User
 		std::string	_host_name;
 		bool		_tried_to_auth;
 		bool		_auth;
+		std::string	_pwd;
 	
 	public :
 		User(int socket_desc);
+
 		std::string const	getClient() const;
 		bool const 			&getFirstTry() const;
 		std::string const	getNick() const;
+		std::string const	&getPassword() const;
 		std::string const	&getUserName() const;
 		std::string const	&getHostName() const;
 		bool const			&getTriedToAuth() const;
 		bool const			&getAuth() const;
 		int const			&getUserSd() const;
+
+		void				setPass(std::string str);
+		void				setNick(std::string str);
+		void				setUser(std::string str);
+		void				setAuth(bool str);
 
 		~User();
 
