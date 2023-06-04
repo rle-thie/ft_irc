@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/04 22:45:49 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 01:30:12 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ int	Server::_trait_requests(pollfd pfd)
 	_buff.clear();
 	for (int i = 0; i < lines; i++)
 	{
-		std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
+		// std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
 		_manageCmd(pfd, _recvs[i]);
 	}
 	return 0;
@@ -261,7 +261,9 @@ int Server::_fillRecvs(std::string buff)
 int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cmd)
 {
 	user=user;
-	std::cout << cmd.first << "----" << cmd.second << std::endl;
+	cmd=cmd;
+	// std::cout << cmd.first << "----" << cmd.second << std::endl;
+	// std::cout << cmd.first << "----" << cmd.second << std::endl;
 	// if (user->getNick() == "" && cmd.first == "NICK")
 	// {
 	// 	if (!user->getAuth())

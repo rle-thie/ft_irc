@@ -34,10 +34,15 @@ class Server
 		size_t	_recvAll(pollfd pollfd);
 		int		_fillRecvs(std::string buff);
 		int		_manageCmd(pollfd pfd, std::pair<std::string, std::string> cmd);
-		int		_sendError(User *user, std::string err);
-		int		_sendAll(int fd, const char *buf, size_t len, int flags);
 		int		_disconnectUser(User *user, int ret);
 		int		_acceptConnection(User *user, std::pair<std::string, std::string> cmd);
+
+		// send info
+		int		_sendError(User *user, std::string err);
+		int		_sendRpl(User *user, std::string strtosend);
+		int		_sendAll(int fd, const char *buf, size_t len, int flags);
+		
+		// utils
 		bool	_is_auth(User *usr);
 };
 
