@@ -44,6 +44,21 @@ class Server
 		
 		// utils
 		bool	_is_auth(User *usr);
+		User*	_find_user(std::string nickname);
+
+		//cmds 
+		std::map<std::string, void (Server::*) (User *,std::string)> _cmdmap;
+		void _nick_cmd(User *user, std::string args);
+		// void _user_cmd(User *user, std::string args);
+		// void _pass_cmd(User *user, std::string args);
+		// void _join_cmd(User *user, std::string args);
+		// void _oper_cmd(User *user, std::string args);
+		// void _mode_cmd(User *user, std::string args);
+		// void _quit_cmd(User *user, std::string args);
+		// void _kick_cmd(User *user, std::string args);
+		// void _privmsg_cmd(User *user, std::string args);
+		// void _invite_cmd(User *user, std::string args);
+		// void _ping_cmd(User *user, std::string args);
 };
 
 #endif

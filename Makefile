@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
+#    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 08:42:57 by arudy             #+#    #+#              #
-#    Updated: 2023/06/03 18:49:10 by rle-thie         ###   ########.fr        #
+#    Updated: 2023/06/05 18:43:36 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,13 @@ NAME	= ircserv
 
 SRCS_CLASS = $(addprefix Class/, Server.cpp User.cpp Commands.cpp Utils.cpp)
 
+SRCS_CMDS = $(addprefix Class/cmds/, Invitecmd.cpp Joincmd.cpp Kickcmd.cpp Modecmd.cpp Nickcmd.cpp Opercdm.cpp Passcmd.cpp Pingcmd.cpp Privmsg.cpp Quitcmd.cpp Usercmd.cpp)
+
 DIR_SRCS = srcs
 
 DIR_OBJS = objects
 
-SRCS	= main.cpp ${SRCS_CLASS}
+SRCS	= main.cpp ${SRCS_CLASS} ${SRCS_CMDS}
 
 OBJS	= $(SRCS:%.cpp=$(DIR_OBJS)/%.o)
 

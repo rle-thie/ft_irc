@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 16:04:03 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:31:04 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ Server::Server(char *cport, std::string pswd)
 	_password = pswd;
 	_sd = -1;
 	_nb_fd = 1;
+	_cmdmap["NICK"] = &Server::_nick_cmd;
+	// _cmdmap["USER"] = &Server::_user_cmd;
+	// _cmdmap["PASS"] = &Server::_pass_cmd;
+	// _cmdmap["JOIN"] = &Server::_join_cmd;
+	// _cmdmap["OPER"] = &Server::_oper_cmd;
+	// _cmdmap["MODE"] = &Server::_mode_cmd;
+	// _cmdmap["QUIT"] = &Server::_quit_cmd;
+	// _cmdmap["KICK"] = &Server::_kick_cmd;
+	// _cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;
+	// _cmdmap["INVITE"] = &Server::_invite_cmd;
+	// _cmdmap["PING"] = &Server::_ping_cmd;
 }
 
 Server::~Server()
@@ -261,28 +272,19 @@ int Server::_fillRecvs(std::string buff)
 
 int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cmd)
 {
-	user=user;
-	cmd=cmd;
-	// std::cout << cmd.first << "----" << cmd.second << std::endl;
-	// std::cout << cmd.first << "----" << cmd.second << std::endl;
-	// if (user->getNick() == "" && cmd.first == "NICK")
-	// {
-	// 	if (!user->getAuth())
-	// 	{
-	// 		std::cout << "no nick" << std::endl;
-	// 		return _disconnectUser(user, 2);
-	// 	}
-	// }
-	// if (cmd.first == "USER")
-	// {
-	// 	if (user->getNick() == "")
-	// 	{
-	// 		std::cout << "cmd = user and no nick" << std::endl;
-	// 		return _disconnectUser(user, 2);
-	// 	}
-	// }
-	// else
-	// 	return _disconnectUser(user, 2);
+	user = user;
+	cmd = cmd;
+	std::map<std::string, void (Server::*)(User *, std::string)>::iterator iter;
+	for (iter = _cmdmap.begin(); iter != _cmdmap.end(); iter++)
+	{
+		// on exec si la cmd est trouvée
+		if (cmd.first == iter->first)
+		{
+        	(this->*(iter->second))(user, cmd.second);
+			break;
+		}
+		// si on ne trouve pas la cmd on envoie uknowncmd et si c'est un cap on ignore
+	}
 	return 0;
 }
 

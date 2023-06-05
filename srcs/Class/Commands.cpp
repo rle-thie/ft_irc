@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Commands.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:29:33 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 16:28:16 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:49:44 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int Server::_manageCmd(pollfd pfd, std::pair<std::string, std::string> cmd)
 {
 	std::cout << "User" << _user_dict[pfd.fd]->getUserSd() << "<<--- = '" << cmd.first << "' > '" << cmd.second << "'" << std::endl;
+	_acceptConnection(_user_dict[pfd.fd], cmd);
 	if (_user_dict[pfd.fd]->getAuth() == true)
 		_acceptConnection(_user_dict[pfd.fd], cmd);
 	else if (cmd.first == "CAP")
