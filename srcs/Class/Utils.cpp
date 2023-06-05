@@ -41,8 +41,7 @@ bool	Server::_is_auth(User *usr)
 		{
 			std::cout << usr->getNick() << "[DEBUG] is now auth" << std::endl;
 			usr->setAuth(true);
-			if (usr->getPassword() != _password)
-				return (_disconnectUser(usr, 0));
+			// return (_disconnectUser(usr, 0));
 		}
 		return (1);
 	}

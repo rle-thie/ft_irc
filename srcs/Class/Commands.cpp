@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:29:33 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 01:52:34 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:28:16 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,18 @@ int Server::_manageCmd(pollfd pfd, std::pair<std::string, std::string> cmd)
 		return 1;
 	if (_user_dict[pfd.fd]->getAuth() == false)
 	{
-		if (cmd.first == "PASS")
+		if (cmd.first == "PASS" && _user_dict[pfd.fd]->getPassword() == "")
 		{
-			std::cout << "[DEBUG] Mot de passe stocked : " << cmd.second << std::endl;
-			_user_dict[pfd.fd]->setPass(cmd.second);
+			if (cmd.second == _password)
+			{
+				std::cout << "[DEBUG] Mot de passe stocked : " << cmd.second << std::endl;
+				_user_dict[pfd.fd]->setPass(cmd.second);
+			}
+			else
+			{
+				std::cout << "[DEBUG] Wrong password" << std::endl;
+				return (1);
+			}
 		}
 		else if (cmd.first == "NICK")
 		{
