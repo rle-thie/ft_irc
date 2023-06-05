@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 16:04:03 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:42:57 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,10 +182,14 @@ int	Server::_trait_requests(pollfd pfd)
 		return ret;
 	_recvs.clear();
 	lines = _fillRecvs(std::string(_buff));
+	std::cout << "[DEBUG] total ligne:" << lines << ", packet brut recv:'" << _buff << "'" << std::endl;
 	_buff.clear();
 	for (int i = 0; i < lines; i++)
 	{
-		std::cout << lines << std::endl;
+		std::cout << "[DEBUG] ligne:" << i << "_first:" << _recvs[i].first << "_seconde:" << _recvs[i].second << std::endl;
+	}
+	for (int i = 0; i < lines; i++)
+	{
 		// std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
 		_manageCmd(pfd, _recvs[i]);
 	}
@@ -206,7 +210,7 @@ size_t Server::_recvAll(pollfd pollfd) {
 		if (size == 0)
 		{
 			// std::cout << "disconnect user... inprogress" << std::endl;
-			std::cout << "size = 0 ---> disconnect" << std::endl;
+			std::cout << "[DEBUG] size = 0 ---> disconnect" << std::endl;
 			return _disconnectUser(_user_dict[pollfd.fd], 0);
 			return 1;
 		}
