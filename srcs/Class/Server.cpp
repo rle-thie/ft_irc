@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 17:42:57 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:18:59 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Server::Server(char *cport, std::string pswd)
 	_password = pswd;
 	_sd = -1;
 	_nb_fd = 1;
+	_creation_time = _current_time();
 }
 
 Server::~Server()
@@ -142,7 +143,7 @@ int Server::_disconnectUser(User *user, int ret)
 	std::vector<pollfd>::iterator it;
 	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
 		;
-	// user->removeFromAll();
+	// usr->removeFromAllChannel();
 	// _delEmptyChans();
 	_pollfd.erase(it);
 	_user_dict.erase(user->getUserSd());
@@ -163,7 +164,7 @@ void	Server::_convert_new()
 	// std::cout << "convert_new()" << std::endl;
 	len_sockaddr = sizeof(new_user);
 	new_fd = accept(_sd, (sockaddr *)&new_user, &len_sockaddr);
-	_user_dict.insert(std::pair<int, User*>(new_fd, new User(new_fd)));
+	_user_dict.insert(std::pair<int, User*>(new_fd, new User(new_fd, inet_ntoa(new_user.sin_addr))));
 	// inet_ntoa() converti en une adresse ip normal
 	std::cout << inet_ntoa(new_user.sin_addr) << " !\n" << std::endl;
 	_pollfd.push_back(pollfd());

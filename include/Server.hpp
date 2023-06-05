@@ -20,6 +20,8 @@ class Server
 		std::string											_buff;
 		std::vector<std::pair<std::string, std::string> >	_recvs;
 		std::map<const std::string, commands>				_commands;
+		std::string											_creation_time;
+
 	
 	public :
 		Server(char *cport, std::string pswd);
@@ -43,7 +45,8 @@ class Server
 		int		_sendAll(int fd, const char *buf, size_t len, int flags);
 		
 		// utils
-		bool	_is_auth(User *usr);
+		bool		_is_auth(User *usr);
+		std::string	_current_time();
 };
 
 #endif
