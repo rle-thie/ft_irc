@@ -6,9 +6,10 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 19:31:04 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/05 20:06:31 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/Irc.hpp"
 
@@ -34,6 +35,7 @@ Server::Server(char *cport, std::string pswd)
 	// _cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;
 	// _cmdmap["INVITE"] = &Server::_invite_cmd;
 	// _cmdmap["PING"] = &Server::_ping_cmd;
+	_creation_time = _current_time();
 }
 
 Server::~Server()
@@ -153,7 +155,7 @@ int Server::_disconnectUser(User *user, int ret)
 	std::vector<pollfd>::iterator it;
 	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
 		;
-	// user->removeFromAll();
+	// usr->removeFromAllChannel();
 	// _delEmptyChans();
 	_pollfd.erase(it);
 	_user_dict.erase(user->getUserSd());
@@ -174,7 +176,7 @@ void	Server::_convert_new()
 	// std::cout << "convert_new()" << std::endl;
 	len_sockaddr = sizeof(new_user);
 	new_fd = accept(_sd, (sockaddr *)&new_user, &len_sockaddr);
-	_user_dict.insert(std::pair<int, User*>(new_fd, new User(new_fd)));
+	_user_dict.insert(std::pair<int, User*>(new_fd, new User(new_fd, inet_ntoa(new_user.sin_addr))));
 	// inet_ntoa() converti en une adresse ip normal
 	std::cout << inet_ntoa(new_user.sin_addr) << " !\n" << std::endl;
 	_pollfd.push_back(pollfd());
@@ -193,10 +195,14 @@ int	Server::_trait_requests(pollfd pfd)
 		return ret;
 	_recvs.clear();
 	lines = _fillRecvs(std::string(_buff));
+	std::cout << "[DEBUG] total ligne:" << lines << ", packet brut recv:'" << _buff << "'" << std::endl;
 	_buff.clear();
 	for (int i = 0; i < lines; i++)
 	{
-		std::cout << lines << std::endl;
+		std::cout << "[DEBUG] ligne:" << i << "_first:" << _recvs[i].first << "_seconde:" << _recvs[i].second << std::endl;
+	}
+	for (int i = 0; i < lines; i++)
+	{
 		// std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
 		_manageCmd(pfd, _recvs[i]);
 	}
@@ -217,7 +223,7 @@ size_t Server::_recvAll(pollfd pollfd) {
 		if (size == 0)
 		{
 			// std::cout << "disconnect user... inprogress" << std::endl;
-			std::cout << "size = 0 ---> disconnect" << std::endl;
+			std::cout << "[DEBUG] size = 0 ---> disconnect" << std::endl;
 			return _disconnectUser(_user_dict[pollfd.fd], 0);
 			return 1;
 		}

@@ -16,7 +16,7 @@ class User
 		std::string	_pwd;
 	
 	public :
-		User(int socket_desc);
+		User(int socket_desc, std::string hostname);
 
 		std::string const	getClient() const;
 		bool const 			&getFirstTry() const;

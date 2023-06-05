@@ -6,19 +6,19 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/04 23:47:34 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:37:57 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/Irc.hpp"
 
-User::User(int socket_desc)
+User::User(int socket_desc, std::string hostname)
 {
 	_sd = socket_desc;
 	_user_name = "";
 	_first_try = 1;
 	_nick = "";
-	_host_name = "";
+	_host_name = hostname;
 	_tried_to_auth = 0;
 	_auth = 0;
 	_pwd = "";
@@ -26,9 +26,7 @@ User::User(int socket_desc)
 
 std::string const User::getClient() const
 {
-	if (getFirstTry())
-		return "";
-	return (getNick() + "!" + getUserName() + "@" + getHostName());
+	return (getNick() + "@" + getHostName());
 }
 
 // ---------- getter -----------

@@ -20,6 +20,8 @@ class Server
 		std::string											_buff;
 		std::vector<std::pair<std::string, std::string> >	_recvs;
 		std::map<const std::string, commands>				_commands;
+		std::string											_creation_time;
+
 	
 	public :
 		Server(char *cport, std::string pswd);
@@ -59,6 +61,8 @@ class Server
 		// void _privmsg_cmd(User *user, std::string args);
 		// void _invite_cmd(User *user, std::string args);
 		// void _ping_cmd(User *user, std::string args);
+		bool		_is_auth(User *usr);
+		std::string	_current_time();
 };
 
 #endif

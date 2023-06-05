@@ -17,6 +17,7 @@
 #include <cerrno>
 #include <arpa/inet.h>
 #include <map>
+#include <ctime>
 
 #include <netdb.h>
 #include <sys/socket.h>
@@ -27,5 +28,6 @@
 #include "Exception.hpp"
 #include "Display.hpp"
 
+std::string	currentTime();
 
 #endif

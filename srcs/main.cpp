@@ -6,13 +6,22 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:24:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/03/08 18:01:05 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:17:19 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Irc.hpp"
 
 bool run = true;
+
+std::string Server::_current_time()
+{
+	time_t t = std::time(0);
+	struct tm *now = std::localtime(&t);
+	std::string time(asctime(now));
+	time.erase(time.end() - 1);
+	return time;
+}
 
 void	signal_checker(int sig)
 {
