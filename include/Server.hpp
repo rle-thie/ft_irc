@@ -56,7 +56,7 @@ class Server
 		// void _join_cmd(User *user, std::string args);
 		// void _oper_cmd(User *user, std::string args);
 		// void _mode_cmd(User *user, std::string args);
-		// void _quit_cmd(User *user, std::string args);
+		void _quit_cmd(User *user, std::string args);
 		// void _kick_cmd(User *user, std::string args);
 		// void _privmsg_cmd(User *user, std::string args);
 		// void _invite_cmd(User *user, std::string args);

@@ -14,6 +14,7 @@ class User
 		bool		_tried_to_auth;
 		bool		_auth;
 		std::string	_pwd;
+		bool		_cap;
 	
 	public :
 		User(int socket_desc, std::string hostname);
@@ -24,14 +25,15 @@ class User
 		std::string const	&getPassword() const;
 		std::string const	&getUserName() const;
 		std::string const	&getHostName() const;
-		bool const			&getTriedToAuth() const;
 		bool const			&getAuth() const;
 		int const			&getUserSd() const;
+		bool const			&getCap() const;
 
 		void				setPass(std::string str);
 		void				setNick(std::string str);
 		void				setUser(std::string str);
 		void				setAuth(bool str);
+		void				setCap(bool str);
 
 		~User();
 

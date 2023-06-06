@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
+#    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 08:42:57 by arudy             #+#    #+#              #
-#    Updated: 2023/06/05 18:43:36 by ldevy            ###   ########.fr        #
+#    Updated: 2023/06/06 02:31:06 by rle-thie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,15 +50,15 @@ fclean: clean
 re: fclean all
 
 ree: re
-	./ircserv 2222 abcd
+	./ircserv 2222 aaa
 
 rc: re
-	${RM} ${OBJS} && clear && ./ircserv 6667 lol
+	${RM} ${OBJS} && clear && ./ircserv 2222 aaa
 
 rv: re
-	${RM} ${OBJS} && clear && valgrind --leak-check=full ./ircserv 6667 lol
+	${RM} ${OBJS} && clear && valgrind --leak-check=full ./ircserv 2222 aaa
 
 v: all
-	valgrind --leak-check=full ./ircserv 6667 lol
+	valgrind --leak-check=full ./ircserv 2222 aaa
 
 .PHONY: all clean fclean re rc rv v

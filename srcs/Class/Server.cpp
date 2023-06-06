@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 20:06:31 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/06 02:57:46 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,10 @@ int Server::_disconnectUser(User *user, int ret)
 	std::vector<pollfd>::iterator it;
 	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
 		;
+		
 	// usr->removeFromAllChannel();
 	// _delEmptyChans();
+
 	_pollfd.erase(it);
 	_user_dict.erase(user->getUserSd());
 	_recvs.clear();
@@ -204,7 +206,9 @@ int	Server::_trait_requests(pollfd pfd)
 	for (int i = 0; i < lines; i++)
 	{
 		// std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
-		_manageCmd(pfd, _recvs[i]);
+		// si manageCmd renvoie 1 = on stop l'execution des cmd en attente parce que erreur donc plus de user et donc ca segfault
+		if (_manageCmd(pfd, _recvs[i]) == 1)
+			break;
 	}
 	return 0;
 }

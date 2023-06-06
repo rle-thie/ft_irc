@@ -13,6 +13,7 @@ void Server::_nick_cmd(User *user, std::string args)
 		_sendError(user, ERR_NICKNAMEINUSE(user->getNick()));
 	}
 	user->setNick(args);
+	_sendRpl(user, RPL_NICKSUCCES(args));
 }
 
 User* Server::_find_user(std::string nickname)
