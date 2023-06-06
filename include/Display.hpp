@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 03:03:00 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:21:01 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define ERR_UNKNOWNCOMMAND(client, nickname, cmd) (":" + std::string(client) + " 421 " + std::string(nickname) + " " + std::string(cmd) + " :Unknown command \r\n")
 #define ERR_NOCAP ": irc.42 400 : Connection refused, no CAP provided \r\n"
 #define ERR_WRONGPASSWORD ": irc.42 400 : Connection refused, wrong password \r\n"
+#define ERR_NOPASSWORD ": irc.42 400 : Connection refused, You're not connected \r\n"
 #define ERR_NONICKNAMEAUTH ": irc.42 400 : Connection refused, No nickname provided, registration not completed\r\n"
 // err de la cmd NICK
 #define ERR_NONICKNAMEGIVEN(nickname) (":irc.42 431 " + std::string(nickname) + " :No nickname given")
