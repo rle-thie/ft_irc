@@ -35,17 +35,17 @@ int Server::_sendAll(int fd, const char *buf, size_t len, int flags)
 
 bool	Server::_is_auth(User *usr)
 {
-	std::cout << "[DEBUG] checking auth..." << std::endl;
+	std::cout << GRAS "[IRC SERVER]" RESET " checking for auth..." << std::endl;
 	if (usr->getNick() != "" && usr->getUserName() != "" && usr->getPassword() != "")
 	{
 		if (usr->getAuth() == false)
 		{
-			std::cout << usr->getNick() << "[DEBUG] is now auth" << std::endl;
+			std::cout << GRAS "[IRC SERVER] " RESET << usr->getNick() << " is now auth" << std::endl;
 			usr->setAuth(true);
 			// return (_disconnectUser(usr, 0));
 		}
 		return (1);
 	}
-	std::cout << "[DEBUG] not ok for auth..." << std::endl;
+	// std::cout << "[DEBUG] not ok for auth..." << std::endl;
 	return (0);
 }

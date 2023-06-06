@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 19:58:02 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:21:11 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 #define ERR_NEEDMOREPARAMS (cmd, nickname)(":irc.42 461 " + std::string(nickname) + " " + std::string(cmd) + " :Not enough parameters\r\n")
 // err de la cmd NICK
 #define ERR_NONICKNAMEGIVEN(nickname) (":irc.42 431 " + std::string(nickname) + " :No nickname given\r\n")
-#define ERR_NICKNAMEINUSE(nickname) (":irc.42 433 " + std::string(nickname) + " :Nickname is already in use\r\n")
+#define ERR_NICKNAMEINUSE(nickname) (":433 " + std::string(nickname) + " :Nickname is already in use\r\n")
 // err cmd USER
 #define ERR_ALREADYREGISTRED(nickname) (":irc.42 462 " + std::string(nickname) + " :Unauthorized command (already registered)\r\n")
 
@@ -43,7 +43,7 @@
 #define RPL_YOURHOST(client, nickname) (":" + std::string(client) + " 002 " + std::string(nickname) + " :Your host is irc.42\r\n")
 #define RPL_CREATED(client, nickname, crea_time) (":" + std::string(client) + " 003 " + std::string(nickname) + " :Server was created " + std::string(crea_time) + " \r\n")
 #define RPL_MYINFO(client, nickname) (":" + std::string(client) + " 004 " + std::string(nickname) + " :irc.server 1.0 io kl\r\n")
-#define RPL_GOODPASS GREEN "Connection accepted !\n" RESET "Please auth with '/NICK' and '/USER'\r\n"
+#define RPL_GOODPASS GREEN "Connection accepted !" RESET "\r\n"
 #define RPL_NICKSUCCES(nick) ("You're now known as " + std::string(nick) + "!\r\n")
 #define RPL_PONG(args)("PONG " + std::string(args) + "\r\n")
 #define RPL_PONGEMPTY "PONG\r\n"

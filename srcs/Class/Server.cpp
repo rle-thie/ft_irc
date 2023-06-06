@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 19:54:18 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/06 23:14:32 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,11 +180,12 @@ void	Server::_convert_new()
 	new_fd = accept(_sd, (sockaddr *)&new_user, &len_sockaddr);
 	_user_dict.insert(std::pair<int, User*>(new_fd, new User(new_fd, inet_ntoa(new_user.sin_addr))));
 	// inet_ntoa() converti en une adresse ip normal
-	std::cout << inet_ntoa(new_user.sin_addr) << " !\n" << std::endl;
+	// std::cout << inet_ntoa(new_user.sin_addr) << " !\n" << std::endl;
 	_pollfd.push_back(pollfd());
 	_pollfd.back().fd = new_fd;
 	_pollfd.back().events = POLLIN;
 	_nb_fd++;
+	std::cout << GRAS "[IRC SERVER] " RESET GREEN << "User" << new_fd << " is comming" RESET << std::endl; 
 }
 
 int	Server::_trait_requests(pollfd pfd)
