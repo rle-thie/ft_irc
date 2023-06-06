@@ -49,18 +49,18 @@ class Server
 		User*	_find_user(std::string nickname);
 
 		//cmds 
-		std::map<std::string, void (Server::*) (User *,std::string)> _cmdmap;
-		void _nick_cmd(User *user, std::string args);
-		// void _user_cmd(User *user, std::string args);
-		// void _pass_cmd(User *user, std::string args);
-		// void _join_cmd(User *user, std::string args);
-		// void _oper_cmd(User *user, std::string args);
-		// void _mode_cmd(User *user, std::string args);
-		void _quit_cmd(User *user, std::string args);
-		// void _kick_cmd(User *user, std::string args);
-		// void _privmsg_cmd(User *user, std::string args);
-		// void _invite_cmd(User *user, std::string args);
-		// void _ping_cmd(User *user, std::string args);
+		std::map<std::string, bool (Server::*) (User *,std::string)> _cmdmap;
+		bool _nick_cmd(User *user, std::string args);
+		bool _user_cmd(User *user, std::string args);
+		// bool _pass_cmd(User *user, std::string args);
+		// bool _join_cmd(User *user, std::string args);
+		// bool _oper_cmd(User *user, std::string args);
+		// bool _mode_cmd(User *user, std::string args);
+		bool _quit_cmd(User *user, std::string args);
+		// bool _kick_cmd(User *user, std::string args);
+		// bool _privmsg_cmd(User *user, std::string args);
+		// bool _invite_cmd(User *user, std::string args);
+		// bool _ping_cmd(User *user, std::string args);
 		std::string	_current_time();
 };
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 02:57:46 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:30:27 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Server::Server(char *cport, std::string pswd)
 	_sd = -1;
 	_nb_fd = 1;
 	_cmdmap["NICK"] = &Server::_nick_cmd;
-	// _cmdmap["USER"] = &Server::_user_cmd;
+	_cmdmap["USER"] = &Server::_user_cmd;
 	// _cmdmap["PASS"] = &Server::_pass_cmd;
 	// _cmdmap["JOIN"] = &Server::_join_cmd;
 	// _cmdmap["OPER"] = &Server::_oper_cmd;
@@ -284,18 +284,24 @@ int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cm
 {
 	user = user;
 	cmd = cmd;
-	std::map<std::string, void (Server::*)(User *, std::string)>::iterator iter;
+	bool ret = true;
+	
+	std::map<std::string, bool (Server::*)(User *, std::string)>::iterator iter;
 	for (iter = _cmdmap.begin(); iter != _cmdmap.end(); iter++)
 	{
 		// on exec si la cmd est trouvée
 		if (cmd.first == iter->first)
 		{
-        	(this->*(iter->second))(user, cmd.second);
-			break;
+        	ret = (this->*(iter->second))(user, cmd.second);
+			return (ret);
 		}
+		else if (cmd.first == "CAP")
+			return true;
 		// si on ne trouve pas la cmd on envoie uknowncmd et si c'est un cap on ignore
 	}
-	return 0;
+	if (iter == _cmdmap.end())
+		_sendError(user, ERR_UNKNOWNCOMMAND(user->getNick(), cmd.first));
+	return true;
 }
 
 Exception::err::err(const char *msg) : _msg(msg)
