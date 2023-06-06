@@ -4,14 +4,15 @@ int Server::_sendError(User *user, std::string err)
 {
 	_sendAll(user->getUserSd(), err.c_str(), err.length(), 0);
 	// std::cout << "error..." << std::endl;
-	std::cout << "--->> = '" << err << "'" << std::endl;
+	std::cout << DIS_SENDERR << user->getUserSd() << DIS_SENDERREND(err) << std::endl;
 	return 1;
 }
 
 int Server::_sendRpl(User *user, std::string strtosend)
 {
 	_sendAll(user->getUserSd(), strtosend.c_str(), strtosend.length(), 0);
-	std::cout << "--->> = '" << strtosend << "'" << std::endl;
+	// std::cout << "\033[1m\033[96m[IRC SERVER]\033[0m --->> '" << strtosend << "'" << std::endl;
+	std::cout << DIS_SEND << user->getUserSd() << DIS_SENDEND(strtosend) << std::endl;
 	return 1;
 }
 

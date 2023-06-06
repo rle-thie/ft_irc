@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 17:30:27 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/06 19:54:18 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ Server::Server(char *cport, std::string pswd)
 	// _cmdmap["JOIN"] = &Server::_join_cmd;
 	// _cmdmap["OPER"] = &Server::_oper_cmd;
 	// _cmdmap["MODE"] = &Server::_mode_cmd;
-	// _cmdmap["QUIT"] = &Server::_quit_cmd;
+	_cmdmap["QUIT"] = &Server::_quit_cmd;
 	// _cmdmap["KICK"] = &Server::_kick_cmd;
 	// _cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;
 	// _cmdmap["INVITE"] = &Server::_invite_cmd;
-	// _cmdmap["PING"] = &Server::_ping_cmd;
+	_cmdmap["PING"] = &Server::_ping_cmd;
 	_creation_time = _current_time();
 }
 
@@ -98,7 +98,7 @@ void	Server::init(void)
 	// std::cout << _pollfd.back().events << std::endl;
 	// std::cout << _pollfd.back().fd << std::endl;
 	// std::cout << _pollfd.back().revents << std::endl;
-	std::cout << "[IRC SERVER] setup on port " << _port << std::endl;
+	std::cout << GREEN GRAS<< "[IRC SERVER] setup on port " << _port << RESET << std::endl;
 }
 
 void	Server::start(void)
@@ -106,7 +106,7 @@ void	Server::start(void)
 	// throw Exception::err("caca");
 	if (_nb_fd == 1)
 	{
-		std::cout << "wait clients..." << std::endl;
+		std::cout << BLUE << "wait clients..." << RESET << std::endl;
 	}
 	if (poll(&_pollfd[0], _nb_fd, -1) == -1)
 	{
@@ -149,9 +149,9 @@ int Server::_disconnectUser(User *user, int ret)
 	}
 	// else if (!user->getTriedToAuth())
 		// error no password
-	std::cout << "=========" << delimiter << std::endl;
+	std::cout << RED << "=========" << delimiter << std::endl;
 	std::cout << "[IRC SERVER] User " << user->getUserSd() << disconnection << std::endl;
-	std::cout << "=========" << delimiter << std::endl;
+	std::cout << "=========" << delimiter << RESET << std::endl;
 	std::vector<pollfd>::iterator it;
 	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
 		;
@@ -197,15 +197,15 @@ int	Server::_trait_requests(pollfd pfd)
 		return ret;
 	_recvs.clear();
 	lines = _fillRecvs(std::string(_buff));
-	std::cout << "[DEBUG] total ligne:" << lines << ", packet brut recv:'" << _buff << "'" << std::endl;
+	// std::cout << "[DEBUG] total ligne:" << lines << ", packet brut recv:'" << _buff << "'" << std::endl;
 	_buff.clear();
+	// for (int i = 0; i < lines; i++)
+	// {
+	// 	std::cout << "[DEBUG] ligne:" << i << "_first:" << _recvs[i].first << "_seconde:" << _recvs[i].second << std::endl;
+	// }
 	for (int i = 0; i < lines; i++)
 	{
-		std::cout << "[DEBUG] ligne:" << i << "_first:" << _recvs[i].first << "_seconde:" << _recvs[i].second << std::endl;
-	}
-	for (int i = 0; i < lines; i++)
-	{
-		// std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
+		std::cout << DIS_RECV << pfd.fd << DIS_RECVEND(_recvs[i].first, _recvs[i].second) << std::endl;
 		// si manageCmd renvoie 1 = on stop l'execution des cmd en attente parce que erreur donc plus de user et donc ca segfault
 		if (_manageCmd(pfd, _recvs[i]) == 1)
 			break;
