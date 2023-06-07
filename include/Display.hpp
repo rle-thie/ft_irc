@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 17:27:09 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:56:33 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 #define ERR_NICKNAMEINUSE(nickname) (": irc.42 433 " + std::string(nickname) + " :Nickname is already in use\r\n")
 // err cmd USER
 #define ERR_ALREADYREGISTRED(nickname) (": irc.42 462 " + std::string(nickname) + " :Unauthorized command (already registered)\r\n")
+//err cmd OPER
+#define RPL_YOUREOPER()
+#define
+#define
+#define
 // REPLY
 #define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome a tous mes srabs wallah\r\n")
 #define RPL_YOURHOST(client, nickname) (":" + std::string(client) + " 002 " + std::string(nickname) + " :Your host is irc.42\r\n")
