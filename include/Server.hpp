@@ -61,7 +61,7 @@ class Server
 		// bool _kick_cmd(User *user, std::string args);
 		// bool _privmsg_cmd(User *user, std::string args);
 		// bool _invite_cmd(User *user, std::string args);
-		// bool _ping_cmd(User *user, std::string args);
+		bool _ping_cmd(User *user, std::string args);
 		std::string	_current_time();
 };
 

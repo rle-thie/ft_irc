@@ -1,7 +1,8 @@
-// #include "../../../include/Irc.hpp"
+#include "../../../include/Irc.hpp"
 
-// void Server::_quit_cmd(User *user, std::string args)
-// {
-// 	(void)user;
-// 	std::cout << "[DEBUG] ta mere la pute quit stocked : " << args << std::endl;
-// }
+bool Server::_quit_cmd(User *user, std::string args)
+{
+	std::cout << "[DEBUG] quit cmd " << args << std::endl;
+	_disconnectUser(user, 1);
+	return (false);
+}
