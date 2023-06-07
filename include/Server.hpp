@@ -21,6 +21,7 @@ class Server
 		std::vector<std::pair<std::string, std::string> >	_recvs;
 		std::map<const std::string, commands>				_commands;
 		std::string											_creation_time;
+		std::string											_opepass;
 
 	
 	public :
@@ -54,7 +55,7 @@ class Server
 		bool _user_cmd(User *user, std::string args);
 		// bool _pass_cmd(User *user, std::string args);
 		// bool _join_cmd(User *user, std::string args);
-		// bool _oper_cmd(User *user, std::string args);
+		bool _oper_cmd(User *user, std::string args);
 		// bool _mode_cmd(User *user, std::string args);
 		bool _quit_cmd(User *user, std::string args);
 		// bool _kick_cmd(User *user, std::string args);

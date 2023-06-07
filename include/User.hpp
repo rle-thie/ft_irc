@@ -15,6 +15,7 @@ class User
 		bool		_auth;
 		std::string	_pwd;
 		bool		_cap;
+		bool		_isope;
 	
 	public :
 		User(int socket_desc, std::string hostname);
@@ -28,12 +29,14 @@ class User
 		bool const			&getAuth() const;
 		int const			&getUserSd() const;
 		bool const			&getCap() const;
+		bool const			&getOpe() const;
 
 		void				setPass(std::string str);
 		void				setNick(std::string str);
 		void				setUser(std::string str);
 		void				setAuth(bool str);
 		void				setCap(bool str);
+		void				setOpe(bool a);
 
 		~User();
 

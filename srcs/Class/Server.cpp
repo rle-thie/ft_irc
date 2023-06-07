@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 17:30:27 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/06 17:50:30 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ Server::Server(char *cport, std::string pswd)
 	_nb_fd = 1;
 	_cmdmap["NICK"] = &Server::_nick_cmd;
 	_cmdmap["USER"] = &Server::_user_cmd;
+	_opepass = "secret";
 	// _cmdmap["PASS"] = &Server::_pass_cmd;
 	// _cmdmap["JOIN"] = &Server::_join_cmd;
-	// _cmdmap["OPER"] = &Server::_oper_cmd;
+	_cmdmap["OPER"] = &Server::_oper_cmd;
 	// _cmdmap["MODE"] = &Server::_mode_cmd;
 	// _cmdmap["QUIT"] = &Server::_quit_cmd;
 	// _cmdmap["KICK"] = &Server::_kick_cmd;

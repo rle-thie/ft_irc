@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   User.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 01:02:35 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:49:07 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ User::User(int socket_desc, std::string hostname)
 	_auth = 0;
 	_pwd = "";
 	_cap = 0;
+	_isope = false;
 }
 
 std::string const User::getClient() const
@@ -30,6 +31,11 @@ std::string const User::getClient() const
 }
 
 // ---------- getter -----------
+
+bool const &User::getOpe() const
+{
+	return _isope;
+}
 
 int const &User::getUserSd() const
 {
@@ -98,6 +104,11 @@ void	User::setAuth(bool str)
 void	User::setCap(bool str)
 {
 	_cap = str;
+}
+
+void	User::setOpe(bool a)
+{
+	_isope = a;
 }
 
 User::~User()
