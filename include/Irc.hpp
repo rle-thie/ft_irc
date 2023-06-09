@@ -23,6 +23,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include "Channel.hpp"
 #include "User.hpp"
 #include "Server.hpp"
 #include "Exception.hpp"

@@ -6,16 +6,17 @@
 class User
 {
 	private :
-		int			_sd;
-		std::string	_user_name;
-		bool		_first_try;
-		std::string	_nick;
-		std::string	_host_name;
-		bool		_tried_to_auth;
-		bool		_auth;
-		std::string	_pwd;
-		bool		_cap;
-		bool		_isope;
+		int						_sd;
+		std::string				_user_name;
+		bool					_first_try;
+		std::string				_nick;
+		std::string				_host_name;
+		bool					_tried_to_auth;
+		bool					_auth;
+		std::string				_pwd;
+		bool					_cap;
+		bool					_isope;
+		std::vector<Channel*>	_channel_joined;
 	
 	public :
 		User(int socket_desc, std::string hostname);
@@ -37,6 +38,8 @@ class User
 		void				setAuth(bool str);
 		void				setCap(bool str);
 		void				setOpe(bool a);
+
+		void				addChannel(Channel *channelToAdd);
 
 		~User();
 

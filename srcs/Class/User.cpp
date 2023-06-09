@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   User.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/06 17:49:07 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/09 23:24:20 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ void	User::setCap(bool str)
 void	User::setOpe(bool a)
 {
 	_isope = a;
+}
+
+void	User::addChannel(Channel *channelToAdd)
+{
+	_channel_joined.push_back(channelToAdd);
 }
 
 User::~User()

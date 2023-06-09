@@ -4,6 +4,7 @@
 #include "Irc.hpp"
 
 class Server;
+class Channel;
 
 typedef int (Server::*commands)(User*, std::string);
 
@@ -22,8 +23,8 @@ class Server
 		std::map<const std::string, commands>				_commands;
 		std::string											_creation_time;
 		std::string											_opepass;
+		std::vector<Channel*>								_channels;
 
-	
 	public :
 		Server(char *cport, std::string pswd);
 		~Server();
@@ -48,13 +49,16 @@ class Server
 		// utils
 		bool	_is_auth(User *usr);
 		User*	_find_user(std::string nickname);
+		Channel	*_already_channel_name(std::string name);
+		void	_delUserFromAllChann(User *user);
+		void	_delEmptyChannels();
 
 		//cmds 
 		std::map<std::string, bool (Server::*) (User *,std::string)> _cmdmap;
 		bool _nick_cmd(User *user, std::string args);
 		bool _user_cmd(User *user, std::string args);
 		// bool _pass_cmd(User *user, std::string args);
-		// bool _join_cmd(User *user, std::string args);
+		bool _join_cmd(User *user, std::string args);
 		bool _oper_cmd(User *user, std::string args);
 		// bool _mode_cmd(User *user, std::string args);
 		bool _quit_cmd(User *user, std::string args);

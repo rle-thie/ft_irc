@@ -49,3 +49,40 @@ bool	Server::_is_auth(User *usr)
 	// std::cout << "[DEBUG] not ok for auth..." << std::endl;
 	return (0);
 }
+
+Channel	*Server::_already_channel_name(std::string name)
+{
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); it++)
+	{
+		if (name == (*it)->getName())
+			return (*it);
+	}
+	return (NULL);
+}
+
+void	Server::_delUserFromAllChann(User *user)
+{
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); it++)
+	{
+		(*it)->_delUser(user);
+	}
+}
+
+void	Server::_delEmptyChannels()
+{
+	std::vector<Channel*>::iterator it = _channels.begin();
+	std::vector<Channel*>::iterator to_del;
+	for (; it != _channels.end();)
+	{
+		if ((*it)->getSizeConnected() == 0)
+		{
+			to_del = it;
+			// it++;
+			delete *to_del;
+			_channels.erase(to_del);
+
+		}
+		else
+			it++;
+	}
+}

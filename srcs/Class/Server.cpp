@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/07 15:01:23 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/10 00:18:19 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Server::Server(char *cport, std::string pswd)
 	_cmdmap["USER"] = &Server::_user_cmd;
 	_opepass = "secret";
 	// _cmdmap["PASS"] = &Server::_pass_cmd;
-	// _cmdmap["JOIN"] = &Server::_join_cmd;
+	_cmdmap["JOIN"] = &Server::_join_cmd;
 	_cmdmap["OPER"] = &Server::_oper_cmd;
 	// _cmdmap["MODE"] = &Server::_mode_cmd;
 	_cmdmap["QUIT"] = &Server::_quit_cmd;
@@ -157,8 +157,12 @@ int Server::_disconnectUser(User *user, int ret)
 	for (it = _pollfd.begin() + 1; it->fd != user->getUserSd(); it++)
 		;
 		
-	// usr->removeFromAllChannel();
-	// _delEmptyChans();
+	_delUserFromAllChann(user);
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); it++)
+	{
+		std::cout << (*it)->getName() << (*it)->getSizeConnected() << std::endl;
+	}
+	_delEmptyChannels();
 
 	_pollfd.erase(it);
 	_user_dict.erase(user->getUserSd());
