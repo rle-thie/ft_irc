@@ -17,9 +17,10 @@ class Channel
 		~Channel();
 
 		// getter
-		std::string	getName();
+		std::string			getName();
 		std::vector<User*> &getUsers();
-		int			getSizeConnected();
+		int					getSizeConnected();
+		std::string			getUsersString();
 
 		// setter
 		void	setName(std::string str);

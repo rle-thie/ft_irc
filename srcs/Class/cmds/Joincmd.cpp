@@ -11,13 +11,14 @@ bool	Server::_join_cmd(User *user, std::string args)
 		NewChannel->setUserConnected(user);
 		_channels.push_back(NewChannel);
 		user->addChannel(NewChannel);
-		
+		_joinRlp(user, NewChannel);
 	}
 	else
 	{
 		std::cout << "channel deja existant" << std::endl;
 		chan->setUserConnected(user);
 		user->addChannel(chan);
+		_joinRlp(user, chan);
 		// _sendRpl(user, );
 	}
 	
@@ -27,4 +28,17 @@ bool	Server::_join_cmd(User *user, std::string args)
 	}
 
 	return (true);
+}
+
+void	Server::_joinRlp(User *user, Channel *chann)
+{
+	std::vector<User*>::iterator it;
+	for (it = chann->getUsers().begin(); it != chann->getUsers().end(); it++)
+	{
+		_sendRpl((*it), RPL_JOIN(user->getClient(), chann->getName()));
+	}
+	// if (topic ?)
+	// 	send rpl topic
+	_sendRpl(user, RPL_NAMEREPLY(user->getClient(), user->getNick(), chann->getName(), chann->getUsersString()));
+	_sendRpl(user, RPL_ENDOFNAMES(user->getClient(), user->getNick(), chann->getName()));
 }

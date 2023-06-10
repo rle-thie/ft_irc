@@ -45,6 +45,7 @@ class Server
 		int		_sendError(User *user, std::string err);
 		int		_sendRpl(User *user, std::string strtosend);
 		int		_sendAll(int fd, const char *buf, size_t len, int flags);
+		void	_joinRlp(User *user, Channel *chann);
 		
 		// utils
 		bool	_is_auth(User *usr);
@@ -52,6 +53,7 @@ class Server
 		Channel	*_already_channel_name(std::string name);
 		void	_delUserFromAllChann(User *user);
 		void	_delEmptyChannels();
+		std::string	_current_time();
 
 		//cmds 
 		std::map<std::string, bool (Server::*) (User *,std::string)> _cmdmap;
@@ -66,7 +68,6 @@ class Server
 		bool _privmsg_cmd(User *user, std::string args);
 		// bool _invite_cmd(User *user, std::string args);
 		bool _ping_cmd(User *user, std::string args);
-		std::string	_current_time();
 };
 
 #endif

@@ -45,3 +45,19 @@ void	Channel::_delUser(User *user)
 		}
 	}
 }
+
+std::string	Channel::getUsersString()
+{
+	std::string	ret;
+	for (std::vector<User*>::iterator it = _connected.begin(); it != _connected.end(); it++)
+	{
+		if (it != _connected.begin())
+		{
+			ret = ret + " ";
+		}
+		// if (op_channel)
+		// 	ret = ret + "@";
+		ret = ret + (*it)->getNick();
+	}
+	return (ret);
+}
