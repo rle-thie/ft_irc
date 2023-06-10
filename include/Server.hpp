@@ -62,8 +62,8 @@ class Server
 		bool _oper_cmd(User *user, std::string args);
 		// bool _mode_cmd(User *user, std::string args);
 		bool _quit_cmd(User *user, std::string args);
-		// bool _kick_cmd(User *user, std::string args);
-		// bool _privmsg_cmd(User *user, std::string args);
+		bool _kick_cmd(User *user, std::string args);
+		bool _privmsg_cmd(User *user, std::string args);
 		// bool _invite_cmd(User *user, std::string args);
 		bool _ping_cmd(User *user, std::string args);
 		std::string	_current_time();

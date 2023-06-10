@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/10 00:18:19 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:12:52 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ Server::Server(char *cport, std::string pswd)
 	_cmdmap["OPER"] = &Server::_oper_cmd;
 	// _cmdmap["MODE"] = &Server::_mode_cmd;
 	_cmdmap["QUIT"] = &Server::_quit_cmd;
-	// _cmdmap["KICK"] = &Server::_kick_cmd;
-	// _cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;
+	_cmdmap["KICK"] = &Server::_kick_cmd;
+	_cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;
 	// _cmdmap["INVITE"] = &Server::_invite_cmd;
 	_cmdmap["PING"] = &Server::_ping_cmd;
 	_creation_time = _current_time();

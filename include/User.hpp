@@ -21,6 +21,7 @@ class User
 	public :
 		User(int socket_desc, std::string hostname);
 
+		std::vector<Channel*> const	&getChan() const;
 		std::string const	getClient() const;
 		bool const 			&getFirstTry() const;
 		std::string const	getNick() const;

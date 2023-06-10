@@ -19,6 +19,11 @@ int	Channel::getSizeConnected()
 	return (_connected.size());
 }
 
+std::vector<User*> &Channel::getUsers()
+{
+	return _connected;
+}
+
 void	Channel::setName(std::string str)
 {
 	_name = str;

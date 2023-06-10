@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/07 15:31:37 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/10 20:04:21 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 #define RED "\033[91m"
 #define BLUE "\033[96m"
 
-#define DIS_SEND GRAS "[IRC SERVER]" RESET GREEN" ----->> User"
+#define DIS_SEND GRAS "[IRC SERVER]" RESET GREEN " ----->> User"
 #define DIS_SENDEND(str) (" : " + std::string(str) + RESET)
 #define DIS_SENDERR GRAS "[IRC SERVER]" RESET RED " ----->> User"
 #define DIS_SENDERREND(str) (" : " + std::string(str) + RESET)
-#define DIS_RECV GRAS "[IRC SERVER]" RESET BLUE" User"
+#define DIS_RECV GRAS "[IRC SERVER]" RESET BLUE " User"
 #define DIS_RECVEND(cmd, args) (" <<----- : " + std::string(cmd) + " " + std::string(args) + RESET)
 
 // ERRORS
@@ -37,9 +37,16 @@
 #define ERR_NICKNAMEINUSE(nickname) (":433 " + std::string(nickname) + " :Nickname is already in use\r\n")
 // err cmd USER
 #define ERR_ALREADYREGISTRED(nickname) (":irc.42 462 " + std::string(nickname) + " :Unauthorized command (already registered)\r\n")
-//err cmd OPER
+// err cmd OPER
 #define ERR_PASSWDMISMATCH(nickname) (":irc.42 464 " + std::string(nickname) + " :Password incorrect\r\n")
-
+// err cmd prvmsg
+#define ERR_NORECIPIENT(nickname, cmd) (":irc.42 411 " + std::string(nickname) + ":No recipient given (" + std::string(cmd) + ")\r\n")
+#define ERR_CANNOTSENDTOCHAN (nickname, channel)(":irc.42 404 " + std::string(nickname) + ":" + std::string(channel) + " :Cannot send to channel\r\n")
+#define ERR_NOTEXTTOSEND(nickname) (":irc.42 412 " + std::string(nickname) + " :No text to send\r\n")
+#define ERR_NOSUCHNICK(target, nickname) (":irc.42 401 " + std::string(nickname) + " :" + std::string(target) + " :No such nick/channel\r\n")
+//general error msg
+#define ERROR RED ":irc.42 ERROR :Internal server error"
+#define ERR_NOTONCHANNEL(nickname, channel) (":irc.42 442 " + std::string(nickname) + std::string(channel) + " :You're not on that channel\r\n")
 // REPLY
 #define RPL_YOUREOPER(nickname) (":irc.42 381 " + std::string(nickname) + " :You are now an IRC operator\r\n")
 #define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome a tous mes srabs wallah\r\n")
@@ -48,9 +55,9 @@
 #define RPL_MYINFO(client, nickname) (":" + std::string(client) + " 004 " + std::string(nickname) + " :irc.server 1.0 io kl\r\n")
 #define RPL_GOODPASS GREEN "Connection accepted !" RESET "\r\n"
 #define RPL_NICKSUCCES(nick) ("You're now known as " + std::string(nick) + "!\r\n")
-#define RPL_PONG(args)("PONG " + std::string(args) + "\r\n")
+#define RPL_PONG(args) ("PONG " + std::string(args) + "\r\n")
 #define RPL_PONGEMPTY "PONG\r\n"
-
+#define MESSAGE(nickname, username, hostname, targetnick, message) (":" + std::string(nickname) + "!" + std::string(username) + "@" + std::string(hostname) + " PRIVMSG " + std::string(targetnick) + " :" + std::string(message) + "\r\n")
 
 // RPL_MYINFO
 // "irc.server" est le nom du serveur IRC.

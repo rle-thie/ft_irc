@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   User.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/09 23:24:20 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:26:32 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ std::string const &User::getPassword() const
 	return _pwd;
 }
 
+
+std::vector<Channel*> const &User::getChan() const
+{
+	return _channel_joined;
+}
 // setter
 
 void	User::setPass(std::string str)
@@ -93,7 +98,11 @@ void	User::setNick(std::string str)
 
 void	User::setUser(std::string str)
 {
-	_user_name = str;
+	size_t pos = str.find(' ');
+	if (pos != std::string::npos)
+		_user_name = str.substr(0, pos);
+	else 
+		_user_name = str;
 }
 
 void	User::setAuth(bool str)
