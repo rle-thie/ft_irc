@@ -4,6 +4,11 @@ bool	Server::_join_cmd(User *user, std::string args)
 {
 	std::cout << "[DEBUG] join cmd :" << args << std::endl;
 	Channel	*chan = _already_channel_name(args);
+	// std::map<std::string, std::string> input = _parseString(args);
+	// for (std::map<std::string, std::string>::iterator it = input.begin(); it != input.end(); it++)
+	// {
+    //     std::cout << "Clé : " << (*it).first << ", Valeur : " << (*it).second << std::endl;
+    // }
 	if (chan == NULL)
 	{
 		Channel	*newChannel = new Channel(args);
@@ -19,8 +24,9 @@ bool	Server::_join_cmd(User *user, std::string args)
 		std::cout << "channel deja existant" << std::endl;
 		chan->setUserConnected(user);
 		user->addChannel(chan);
+		if (user->getOpe() == true)
+			chan->addop(user);
 		_joinRlp(user, chan);
-		// _sendRpl(user, );
 	}
 	
 	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); it++)
