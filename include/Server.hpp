@@ -48,11 +48,12 @@ class Server
 		void	_joinRlp(User *user, Channel *chann);
 		
 		// utils
-		bool	_is_auth(User *usr);
-		User*	_find_user(std::string nickname);
-		Channel	*_already_channel_name(std::string name);
-		void	_delUserFromAllChann(User *user);
-		void	_delEmptyChannels();
+		bool		_is_auth(User *usr);
+		User*		_find_user(std::string nickname);
+		Channel*	_find_channel(std::string nickname);
+		Channel*	_already_channel_name(std::string name);
+		void		_delUserFromAllChann(User *user);
+		void		_delEmptyChannels();
 		std::string	_current_time();
 
 		//cmds 

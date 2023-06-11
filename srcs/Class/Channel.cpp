@@ -56,6 +56,29 @@ void	Channel::_delUser(User *user)
 	}
 }
 
+User* Channel::_findUser(std::string name) const
+{
+	std::vector<User *>::const_iterator ite = _connected.begin();
+	for (; ite != _connected.end(); ite++)
+	{
+		if ((*ite)->getNick() == name)
+			return(*ite);
+	}
+	return(NULL);
+}
+
+
+bool Channel::_am_i_banned(std::string name)
+{
+	std::vector<User *>::const_iterator ite = _ban_list.begin();
+	for (; ite != _ban_list.end(); ite++)
+	{
+		if ((*ite)->getNick() == name)
+			return(true);
+	}
+	return(false);
+}
+
 std::string	Channel::getUsersString()
 {
 	std::string	ret;
