@@ -12,7 +12,6 @@ class Channel
 		std::vector<User*>	_connected;
 		std::vector<User*>	_ban_list;
 		std::vector<User*>	_ope;
-		std::vector<User*>	_banned;
 		// std::string			_mode;
 	
 	public :
