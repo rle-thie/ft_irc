@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/10 23:37:59 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/11 14:51:44 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@
 #define RPL_PONG(args) ("PONG " + std::string(args) + "\r\n")
 #define RPL_PONGEMPTY "PONG\r\n"
 #define MESSAGE(nickname, username, hostname, targetnick, message) (":" + std::string(nickname) + "!" + std::string(username) + "@" + std::string(hostname) + " PRIVMSG " + std::string(targetnick) + " :" + std::string(message) + "\r\n")
+#define RPL_JOIN(client, chan_name) (":" + std::string(client) + " JOIN :" + std::string(chan_name) + "\r\n")
+#define RPL_NAMEREPLY(client, nickname, chan_name, usernames) (":" + std::string(client) +" 353 " + std::string(nickname) + " = " + std::string(chan_name) + " :" + std::string(usernames) + "\r\n")
+#define RPL_ENDOFNAMES(client, nickname, chan_name) (":" + std::string(client) +" 366 " + std::string(nickname) + " " + std::string(chan_name) + " :End of /NAMES list\r\n")
 
 // RPL_MYINFO
 // "irc.server" est le nom du serveur IRC.
