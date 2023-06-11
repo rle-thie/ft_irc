@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/10 21:12:52 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/11 22:23:03 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,3 +313,14 @@ int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cm
 Exception::err::err(const char *msg) : _msg(msg)
 {
 }
+
+Channel* Server::_find_channel(std::string str)
+{
+	std::vector<Channel *>::const_iterator ite = _channels.begin();
+	for (; ite != _channels.end(); ite++)
+	{
+		if ((*ite)->getName() == str)
+			return(*ite);
+	}
+	return(NULL);
+} 

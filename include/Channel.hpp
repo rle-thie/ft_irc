@@ -18,6 +18,10 @@ class Channel
 		Channel(std::string name);
 		~Channel();
 
+		//util 
+		User*	_findUser(std::string name) const;
+		bool	_am_i_banned(std::string name);
+
 		// getter
 		std::string			getName();
 		std::vector<User*> &getUsers();

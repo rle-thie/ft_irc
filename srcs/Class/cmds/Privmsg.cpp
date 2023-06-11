@@ -32,11 +32,7 @@ bool Server::_privmsg_cmd(User *user, std::string args)
 		_sendError(user, ERR_NOSUCHNICK(target, user->getNick()));
 		return(true);	
 	}
-	// if(_find_ban(channel))
-	// {
-	// 	_sendError(user, ERR_CANNOTSENDTOCHAN(user->getNick(), channel_name));
-	// 	return(true);		
-	// }
+
 	if (target[0] == '#')
 	{
 		bool joined = false;
@@ -57,11 +53,16 @@ bool Server::_privmsg_cmd(User *user, std::string args)
 			_sendError(user, ERR_NOTONCHANNEL(user->getNick(), target));
 			return(true);
 		}
-		std::vector<User*>::iterator ite;
-		std::vector<User*> targets = ctarget->getUsers();
+		if (_find_channel(target)->_am_i_banned(user->getNick()))
+		{
+			_sendError(user, ERR_CANNOTSENDTOCHAN(user->getNick(), "target"));
+			return (true);
+		}
+		std::vector<User *>::iterator ite;
+		std::vector<User *> targets = ctarget->getUsers();
 		for (ite = targets.begin(); ite != targets.end(); ite++)
 		{
-			if ((*ite) != user)
+			if ((*ite) != user && !_find_channel(target)->_am_i_banned((*ite)->getNick()))
 			_sendRpl((*ite), MESSAGE(user->getNick(), user->getUserName(), user->getHostName(), target, msg));
 		}
 		return (true);

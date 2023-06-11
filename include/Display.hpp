@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Display.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/11 23:42:15 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/11 23:44:42 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 #define ERR_PASSWDMISMATCH(nickname) (":irc.42 464 " + std::string(nickname) + " :Password incorrect\r\n")
 // err cmd prvmsg
 #define ERR_NORECIPIENT(nickname, cmd) (":irc.42 411 " + std::string(nickname) + ":No recipient given (" + std::string(cmd) + ")\r\n")
-#define ERR_CANNOTSENDTOCHAN (nickname, channel)(":irc.42 404 " + std::string(nickname) + ":" + std::string(channel) + " :Cannot send to channel\r\n")
+#define ERR_CANNOTSENDTOCHAN(nickname, channel)(":irc.42 404 " + std::string(nickname) + ":" + std::string(channel) + " :Cannot send to channel\r\n")
 #define ERR_NOTEXTTOSEND(nickname) (":irc.42 412 " + std::string(nickname) + " :No text to send\r\n")
 #define ERR_NOSUCHNICK(target, nickname) (":irc.42 401 " + std::string(nickname) + " :" + std::string(target) + " :No such nick/channel\r\n")
 //general error msg
@@ -62,6 +62,7 @@
 #define RPL_PONG(args) ("PONG " + std::string(args) + "\r\n")
 #define RPL_PONGEMPTY "PONG\r\n"
 #define MESSAGE(nickname, username, hostname, targetnick, message) (":" + std::string(nickname) + "!" + std::string(username) + "@" + std::string(hostname) + " PRIVMSG " + std::string(targetnick) + " :" + std::string(message) + "\r\n")
+#define MESSAGE_CMD(nickname, username, hostname, targetnick, cmd, message) (":" + std::string(nickname) + "!" + std::string(username) + "@" + std::string(hostname) + " " + std::string(cmd) + " " + std::string(targetnick) + " :" + std::string(message) + "\r\n")
 #define RPL_JOIN(client, chan_name) (":" + std::string(client) + " JOIN :" + std::string(chan_name) + "\r\n")
 #define RPL_PART(client, nickname, chan_name) (":" + std::string(client) + " PART " + std::string(chan_name) + " :" + "\r\n")
 #define RPL_NAMEREPLY(client, nickname, chan_name, usernames) (":" + std::string(client) +" 353 " + std::string(nickname) + " = " + std::string(chan_name) + " :" + std::string(usernames) + "\r\n")
