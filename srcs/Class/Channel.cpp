@@ -24,6 +24,11 @@ std::vector<User*> &Channel::getUsers()
 	return _connected;
 }
 
+std::vector<User*> &Channel::getUsersBan()
+{
+	return _ban_list;
+}
+
 void	Channel::setName(std::string str)
 {
 	_name = str;
@@ -32,6 +37,11 @@ void	Channel::setName(std::string str)
 void	Channel::setUserConnected(User *user)
 {
 	_connected.push_back(user);
+}
+
+void	Channel::setBan(User *user)
+{
+	_ban_list.push_back(user);
 }
 
 void	Channel::_delUser(User *user)

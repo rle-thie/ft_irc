@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/10 20:04:21 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/10 23:37:59 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@
 #define ERR_NOSUCHNICK(target, nickname) (":irc.42 401 " + std::string(nickname) + " :" + std::string(target) + " :No such nick/channel\r\n")
 //general error msg
 #define ERROR RED ":irc.42 ERROR :Internal server error"
-#define ERR_NOTONCHANNEL(nickname, channel) (":irc.42 442 " + std::string(nickname) + std::string(channel) + " :You're not on that channel\r\n")
+#define ERR_NOTONCHANNEL(nickname, channel) (":irc.42 442 " + std::string(nickname) + " " + std::string(channel) + " :You're not on that channel\r\n")
+//	err cmd kick
+#define ERR_NOSUCHCHANNEL(nickname, channel) (":irc.42 403 " + std::string(nickname) + " " + std::string(channel) + " :No such channel\r\n")
+#define ERR_CHANOPRIVSNEEDED(nickname, channel) (":irc.42 482 " + std::string(nickname) + " " + std::string(channel) + " :You're not channel operator\r\n")
+#define ERR_USERNOTINCHANNEL(nickname, channel, target) (":irc.42 441 " + std::string(nickname) + " " + std::string(target) + " " + std::string(channel) + " :They aren't on that channel\r\n")
 // REPLY
 #define RPL_YOUREOPER(nickname) (":irc.42 381 " + std::string(nickname) + " :You are now an IRC operator\r\n")
 #define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome a tous mes srabs wallah\r\n")

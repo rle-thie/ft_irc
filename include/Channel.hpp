@@ -10,6 +10,7 @@ class Channel
 	private :
 		std::string			_name;
 		std::vector<User*>	_connected;
+		std::vector<User*>	_ban_list;
 		// std::string			_mode;
 	
 	public :
@@ -19,12 +20,13 @@ class Channel
 		// getter
 		std::string	getName();
 		std::vector<User*> &getUsers();
+		std::vector<User*> &getUsersBan();
 		int			getSizeConnected();
 
 		// setter
 		void	setName(std::string str);
 		void	setUserConnected(User *user);
-
+		void	setBan(User *user);
 		void	_delUser(User *user);
 
 	// private :
