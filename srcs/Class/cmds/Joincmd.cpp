@@ -6,12 +6,13 @@ bool	Server::_join_cmd(User *user, std::string args)
 	Channel	*chan = _already_channel_name(args);
 	if (chan == NULL)
 	{
-		Channel	*NewChannel = new Channel(args);
+		Channel	*newChannel = new Channel(args);
 
-		NewChannel->setUserConnected(user);
-		_channels.push_back(NewChannel);
-		user->addChannel(NewChannel);
-		_joinRlp(user, NewChannel);
+		newChannel->setUserConnected(user);
+		_channels.push_back(newChannel);
+		user->addChannel(newChannel);
+		newChannel->addop(user);
+		_joinRlp(user, newChannel);
 	}
 	else
 	{

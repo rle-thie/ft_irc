@@ -46,6 +46,7 @@ class Server
 		int		_sendRpl(User *user, std::string strtosend);
 		int		_sendAll(int fd, const char *buf, size_t len, int flags);
 		void	_joinRlp(User *user, Channel *chann);
+		void	_partRpl(User *user, Channel *chann);
 		
 		// utils
 		bool	_is_auth(User *usr);
