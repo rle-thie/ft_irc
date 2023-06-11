@@ -21,6 +21,7 @@ class Channel
 		// getter
 		std::string			getName();
 		std::vector<User*> &getUsers();
+		std::vector<User*> &getUsersBan();
 		int					getSizeConnected();
 		std::string			getUsersString();
 

@@ -5,7 +5,8 @@ bool Server::_kick_cmd(User *user, std::string args)
 	std::vector<std::string> splitstring;
 	size_t spacePos;
 	size_t startPos = 0;
-	int i = 0;
+	// int i = 0;
+	(void)user;
 
 	spacePos = args.find(' ');
 	while (spacePos != std::string::npos)
