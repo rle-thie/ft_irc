@@ -10,6 +10,8 @@ class Channel
 	private :
 		std::string			_name;
 		std::vector<User*>	_connected;
+		std::vector<User*>	_ope;
+		std::vector<User*>	_banned;
 		// std::string			_mode;
 	
 	public :
