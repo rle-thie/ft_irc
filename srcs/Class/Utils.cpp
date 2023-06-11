@@ -62,9 +62,20 @@ Channel	*Server::_already_channel_name(std::string name)
 
 void	Server::_delUserFromAllChann(User *user)
 {
-	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); it++)
+	bool	b = false;
+	for (std::vector<Channel*>::iterator channels_it = _channels.begin(); channels_it != _channels.end(); channels_it++)
 	{
-		(*it)->_delUser(user);
+		b = (*channels_it)->_delUser(user);
+		if (b == true && (*channels_it)->getSizeConnected() != 0)
+		{
+			std::vector<User*> users = (*channels_it)->getUsers();
+			std::vector<User*>::iterator user_connected_it = users.begin();
+			for (; user_connected_it != users.end(); user_connected_it++)
+			{
+				_sendRpl((*user_connected_it), RPL_PART(user->getClient(), user->getNick(), (*channels_it)->getName()));
+			}
+		}
+		
 	}
 }
 
