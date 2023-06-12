@@ -16,6 +16,11 @@ bool	Server::_join_cmd(User *user, std::string args)
 	else
 	{
 		std::cout << "channel deja existant" << std::endl;
+		if (chan->getSizeLimited() && chan->getSizeConnected() >= 5)
+		{
+			_sendError(user, ERR_CHANNELISFULL(user->getNick(), chan->getName()));
+			return (true);
+		}
 		chan->setUserConnected(user);
 		user->addChannel(chan);
 		_joinRlp(user, chan);

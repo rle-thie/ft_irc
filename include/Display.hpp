@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 19:16:51 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/13 00:08:14 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@
 // err cmd 
 #define ERR_USERSDONTMATCH(nickname) (":irc.42 502 " + std::string(nickname) + " :Cannot change mode for other users\r\n")
 #define ERR_UMODEUNKNOWNFLAG(nickname) (":irc.42 501 " + std::string(nickname) + " :Unknown MODE flag\r\n")
+// err join
+#define ERR_CHANNELISFULL(nickname, channel) (":irc.42 501 " + std::string(nickname) + " " + std::string(channel) + " :Cannot join channel (+l)\r\n")
 // REPLY
 #define RPL_YOUREOPER(nickname) (":irc.42 381 " + std::string(nickname) + " :You are now an IRC operator\r\n")
 #define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome a tous mes srabs wallah\r\n")

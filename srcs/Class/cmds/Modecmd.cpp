@@ -51,8 +51,11 @@ bool	Server::_mode_cmd(User *user, std::string args)
 			/* code */
 			break;
 		case 'l':
-			/* code */
-			break;	
+			if (params[1][0] == '+')
+				target->setSizelimited(true);
+			else 
+				target->setSizelimited(false);
+			break;
 		default:
 			{
 				_sendError(user, ERR_UMODEUNKNOWNFLAG(user->getNick()));
