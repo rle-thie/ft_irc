@@ -21,6 +21,11 @@ bool	Server::_join_cmd(User *user, std::string args)
 	}
 	else
 	{
+		if (chan->_findUser(user->getNick()))
+		{
+			_sendError(user, ERR_ALREADYJOINED);
+			return (false);
+		}
 		std::cout << "channel deja existant" << std::endl;
 		chan->setUserConnected(user);
 		user->addChannel(chan);

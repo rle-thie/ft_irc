@@ -4,6 +4,7 @@ Channel::Channel(std::string name)
 {
 	_name = name;
 	_modeTopicOp = true;
+	_inviteOnly = false;
 }
 
 Channel::~Channel()

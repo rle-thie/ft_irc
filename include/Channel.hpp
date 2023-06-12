@@ -14,6 +14,7 @@ class Channel
 		std::vector<User*>	_ope;
 		std::string			_topic;
 		bool				_modeTopicOp;
+		bool				_inviteOnly;
 		// std::string			_mode;
 	
 	public :
