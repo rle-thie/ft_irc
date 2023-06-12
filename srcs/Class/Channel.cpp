@@ -52,14 +52,14 @@ void	Channel::setBan(User *user)
 	_ban_list.push_back(user);
 }
 
-void	Channel::setSizelimited(bool a)
-{
-	_size_limited = a;
-}
-
 void	Channel::addop(User *user)
 {
 	_ope.push_back(user);
+}
+
+void	Channel::setSizelimited(bool a)
+{
+	_size_limited = a;
 }
 
 bool	Channel::_delUser(User *user)

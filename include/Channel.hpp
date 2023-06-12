@@ -37,9 +37,9 @@ class Channel
 		void	setUserConnected(User *user);
 		void	addop(User *user);
 		void	setBan(User *user);
-		void	setSizelimited(bool a);
 		bool	_delUser(User *user);
 		bool	isop(User *user);
+		void	setSizelimited(bool a);
 
 	// private :
 	// 	void _convert_new();
