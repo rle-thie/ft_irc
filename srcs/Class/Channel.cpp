@@ -3,6 +3,7 @@
 Channel::Channel(std::string name)
 {
 	_name = name;
+	_modeTopicOp = true;
 }
 
 Channel::~Channel()
@@ -110,4 +111,24 @@ bool	Channel::isop(User *user)
 			return (true); 
 	}
 	return (false);
+}
+
+std::string	Channel::getTopic()
+{
+	return (_topic);
+}
+
+void	Channel::setTopic(std::string str)
+{
+	_topic = str;
+}
+
+bool	Channel::getModeTopic()
+{
+	return (_modeTopicOp);
+}
+
+void	Channel::setModeTopic(bool b)
+{
+	_modeTopicOp = b;
 }

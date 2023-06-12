@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Display.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 17:26:00 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/12 19:25:29 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@
 #define RPL_PART(client, nickname, chan_name) (":" + std::string(client) + " PART " + std::string(chan_name) + " :" + "\r\n")
 #define RPL_NAMEREPLY(client, nickname, chan_name, usernames) (":" + std::string(client) +" 353 " + std::string(nickname) + " = " + std::string(chan_name) + " :" + std::string(usernames) + "\r\n")
 #define RPL_ENDOFNAMES(client, nickname, chan_name) (":" + std::string(client) +" 366 " + std::string(nickname) + " " + std::string(chan_name) + " :End of /NAMES list\r\n")
+#define RPL_TOPIC(client, nickname, chan_name, topic) (":" + std::string(client) + " 332 " + std::string(nickname) + " " + std::string(chan_name) + " :" + std::string(topic) + "\r\n")
 
 // RPL_MYINFO
 // "irc.server" est le nom du serveur IRC.

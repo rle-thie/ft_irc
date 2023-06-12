@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 16:58:40 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:05:42 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Server::Server(char *cport, std::string pswd)
 	_cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;
 	// _cmdmap["INVITE"] = &Server::_invite_cmd;
 	_cmdmap["PING"] = &Server::_ping_cmd;
+	_cmdmap["TOPIC"] = &Server::_topic_cmd;
 	_creation_time = _current_time();
 }
 

@@ -12,6 +12,8 @@ class Channel
 		std::vector<User*>	_connected;
 		std::vector<User*>	_ban_list;
 		std::vector<User*>	_ope;
+		std::string			_topic;
+		bool				_modeTopicOp;
 		// std::string			_mode;
 	
 	public :
@@ -28,6 +30,8 @@ class Channel
 		std::vector<User*> &getUsersBan();
 		int					getSizeConnected();
 		std::string			getUsersString();
+		std::string			getTopic();
+		bool				getModeTopic();
 
 		// setter
 		void	setName(std::string str);
@@ -36,6 +40,8 @@ class Channel
 		void	setBan(User *user);
 		bool	_delUser(User *user);
 		bool	isop(User *user);
+		void	setTopic(std::string str);
+		void	setModeTopic(bool b);
 
 	// private :
 	// 	void _convert_new();

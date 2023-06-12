@@ -47,6 +47,7 @@ class Server
 		int		_sendAll(int fd, const char *buf, size_t len, int flags);
 		void	_joinRlp(User *user, Channel *chann);
 		void	_partRpl(User *user, Channel *chann);
+		void	_sendTopic(User *user, Channel *chann);
 		
 		// utils
 		bool		_is_auth(User *usr);
@@ -70,6 +71,7 @@ class Server
 		bool _privmsg_cmd(User *user, std::string args);
 		// bool _invite_cmd(User *user, std::string args);
 		bool _ping_cmd(User *user, std::string args);
+		bool _topic_cmd(User *user, std::string args);
 };
 
 #endif
