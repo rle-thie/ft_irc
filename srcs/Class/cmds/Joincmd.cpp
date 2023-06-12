@@ -27,7 +27,7 @@ bool	Server::_join_cmd(User *user, std::string args)
 			return (false);
 		}
 		std::cout << "channel deja existant" << std::endl;
-		if (chan->getSizeLimited() && chan->getSizeConnected() >= 5)
+		if (chan->getSizeLimited() && chan->getSizeConnected() >= 2)
 		{
 			_sendError(user, ERR_CHANNELISFULL(user->getNick(), chan->getName()));
 			return (true);

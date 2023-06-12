@@ -20,23 +20,23 @@ bool	Server::_mode_cmd(User *user, std::string args)
 	std::string part = args.substr(startPos);
 	params.push_back(part);
 	std::cout << "[DEBUG] mode cmd :" << args << std::endl;
-	if (params.size() != 2)
+	if (params.size() < 2)
 	{
 		_sendError(user, ERR_NEEDMOREPARAMS("MODE", user->getNick()));
 		return (true);
 	}
-	//chan mode
 	if (params[0][0] == '#')
 	{
 		Channel *target = _find_channel(params[0]);
 		if(!target)
 			return (true);
-		if (params[1].size() != 2 || params[1][0] != '+' || params[1][0] != '-')
+		if (params[1].size() != 2 || (params[1][0] != '+' && params[1][0] != '-'))
 		{
 			_sendError(user, ERR_UMODEUNKNOWNFLAG(user->getNick()));
 			return (true);
 		}
-		switch (params[1][1])
+		char mode = params[1][1]; 
+		switch (mode)
 		{
 		case 'i':
 			// if (params[1][0] == '+')
@@ -56,6 +56,25 @@ bool	Server::_mode_cmd(User *user, std::string args)
 			else 
 				target->setSizelimited(false);
 			break;
+		case 'o':
+		{
+			if (params.size() != 3)
+			{
+				_sendError(user, ERR_NEEDMOREPARAMS("MODE", user->getNick()));
+				return (true);
+			}
+			User *targetuser = target->_findUser(params[3]);
+			if (!targetuser)
+			{
+				_sendError(user, ERR_USERNOTINCHANNEL(user->getNick(), params[0], params[2]));
+				return (true);			
+			}
+			if (params[1][0] == '+')
+				targetuser->setChanOpe(true);
+			else 
+				targetuser->setChanOpe(false);
+			break;
+		}
 		default:
 			{
 				_sendError(user, ERR_UMODEUNKNOWNFLAG(user->getNick()));
@@ -63,14 +82,6 @@ bool	Server::_mode_cmd(User *user, std::string args)
 			}
 			break;
 		}
-	}
-	//mode sur user
-	else if (params[1] == "+o" || params[1] == "-o")
-	{
-		if(params[1] == "+o")
-			user->setChanOpe(true);
-		else
-			user->setChanOpe(true);
 	}
 	else
 	{

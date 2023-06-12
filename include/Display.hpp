@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/13 00:38:46 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/13 01:28:41 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@
 // err join
 #define ERR_CHANNELISFULL(nickname, channel) (":irc.42 501 " + std::string(nickname) + " " + std::string(channel) + " :Cannot join channel (+l)\r\n")
 #define ERR_ALREADYJOINED ":irc.server 400 : Channel already joined\r\n"
+//err mode 
+
 
 // REPLY
 #define RPL_YOUREOPER(nickname) (":irc.42 381 " + std::string(nickname) + " :You are now an IRC operator\r\n")
