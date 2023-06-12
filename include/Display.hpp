@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 17:15:24 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/12 19:16:51 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@
 #define ERR_NOSUCHCHANNEL(nickname, channel) (":irc.42 403 " + std::string(nickname) + " " + std::string(channel) + " :No such channel\r\n")
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":irc.42 482 " + std::string(nickname) + " " + std::string(channel) + " :You're not channel operator\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, channel, target) (":irc.42 441 " + std::string(nickname) + " " + std::string(target) + " " + std::string(channel) + " :They aren't on that channel\r\n")
+// err cmd 
+#define ERR_USERSDONTMATCH(nickname) (":irc.42 502 " + std::string(nickname) + " :Cannot change mode for other users\r\n")
+#define ERR_UMODEUNKNOWNFLAG(nickname) (":irc.42 501 " + std::string(nickname) + " :Unknown MODE flag\r\n")
 // REPLY
 #define RPL_YOUREOPER(nickname) (":irc.42 381 " + std::string(nickname) + " :You are now an IRC operator\r\n")
 #define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome a tous mes srabs wallah\r\n")
@@ -67,6 +70,7 @@
 #define RPL_JOIN(client, chan_name) (":" + std::string(client) + " JOIN :" + std::string(chan_name) + "\r\n")
 #define RPL_NAMEREPLY(client, nickname, chan_name, usernames) (":" + std::string(client) +" 353 " + std::string(nickname) + " = " + std::string(chan_name) + " :" + std::string(usernames) + "\r\n")
 #define RPL_ENDOFNAMES(client, nickname, chan_name) (":" + std::string(client) +" 366 " + std::string(nickname) + " " + std::string(chan_name) + " :End of /NAMES list\r\n")
+// #define PRL_UMODEIS(msg) (":irc.42 221 yourNick +iwx :+i")
 
 // RPL_MYINFO
 // "irc.server" est le nom du serveur IRC.

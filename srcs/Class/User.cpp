@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/10 21:26:32 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/12 19:08:02 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ User::User(int socket_desc, std::string hostname)
 	_pwd = "";
 	_cap = 0;
 	_isope = false;
+	_ischanope = false;
 }
 
 std::string const User::getClient() const
@@ -35,6 +36,11 @@ std::string const User::getClient() const
 bool const &User::getOpe() const
 {
 	return _isope;
+}
+
+bool const &User::getOpe() const
+{
+	return _ischanope;
 }
 
 int const &User::getUserSd() const
@@ -116,6 +122,11 @@ void	User::setCap(bool str)
 }
 
 void	User::setOpe(bool a)
+{
+	_isope = a;
+}
+
+void	User::setChanOpe(bool a)
 {
 	_isope = a;
 }
