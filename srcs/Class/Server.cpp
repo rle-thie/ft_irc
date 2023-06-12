@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 17:05:42 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/13 00:39:05 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/Irc.hpp"
 
@@ -30,7 +29,7 @@ Server::Server(char *cport, std::string pswd)
 	// _cmdmap["PASS"] = &Server::_pass_cmd;
 	_cmdmap["JOIN"] = &Server::_join_cmd;
 	_cmdmap["OPER"] = &Server::_oper_cmd;
-	// _cmdmap["MODE"] = &Server::_mode_cmd;
+	_cmdmap["MODE"] = &Server::_mode_cmd;
 	_cmdmap["QUIT"] = &Server::_quit_cmd;
 	_cmdmap["KICK"] = &Server::_kick_cmd;
 	_cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;

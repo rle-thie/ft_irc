@@ -15,6 +15,8 @@ class Channel
 		std::string			_topic;
 		bool				_modeTopicOp;
 		bool				_inviteOnly;
+		bool				_size_limited;
+		int					_maxsize;
 		// std::string			_mode;
 	
 	public :
@@ -33,6 +35,7 @@ class Channel
 		std::string			getUsersString();
 		std::string			getTopic();
 		bool				getModeTopic();
+		bool				getSizeLimited();
 
 		// setter
 		void	setName(std::string str);
@@ -43,6 +46,7 @@ class Channel
 		bool	isop(User *user);
 		void	setTopic(std::string str);
 		void	setModeTopic(bool b);
+		void	setSizelimited(bool a);
 
 	// private :
 	// 	void _convert_new();

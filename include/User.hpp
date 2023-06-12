@@ -16,6 +16,7 @@ class User
 		std::string				_pwd;
 		bool					_cap;
 		bool					_isope;
+		bool					_ischanope;
 		std::vector<Channel*>	_channel_joined;
 	
 	public :
@@ -32,6 +33,7 @@ class User
 		int const			&getUserSd() const;
 		bool const			&getCap() const;
 		bool const			&getOpe() const;
+		bool const			&getChanOpe() const;
 
 		void				setPass(std::string str);
 		void				setNick(std::string str);
@@ -39,6 +41,7 @@ class User
 		void				setAuth(bool str);
 		void				setCap(bool str);
 		void				setOpe(bool a);
+		void				setChanOpe(bool a);
 
 		void				addChannel(Channel *channelToAdd);
 

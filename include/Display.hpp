@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Display.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 19:52:04 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/13 00:38:46 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@
 #define ERR_NOSUCHCHANNEL(nickname, channel) (":irc.42 403 " + std::string(nickname) + " " + std::string(channel) + " :No such channel\r\n")
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":irc.42 482 " + std::string(nickname) + " " + std::string(channel) + " :You're not channel operator\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, channel, target) (":irc.42 441 " + std::string(nickname) + " " + std::string(target) + " " + std::string(channel) + " :They aren't on that channel\r\n")
+// err cmd 
+#define ERR_USERSDONTMATCH(nickname) (":irc.42 502 " + std::string(nickname) + " :Cannot change mode for other users\r\n")
+#define ERR_UMODEUNKNOWNFLAG(nickname) (":irc.42 501 " + std::string(nickname) + " :Unknown MODE flag\r\n")
+// err join
+#define ERR_CHANNELISFULL(nickname, channel) (":irc.42 501 " + std::string(nickname) + " " + std::string(channel) + " :Cannot join channel (+l)\r\n")
 #define ERR_ALREADYJOINED ":irc.server 400 : Channel already joined\r\n"
 
 // REPLY
@@ -70,6 +75,7 @@
 #define RPL_PART(client, nickname, chan_name) (":" + std::string(client) + " PART " + std::string(chan_name) + " :" + "\r\n")
 #define RPL_NAMEREPLY(client, nickname, chan_name, usernames) (":" + std::string(client) +" 353 " + std::string(nickname) + " = " + std::string(chan_name) + " :" + std::string(usernames) + "\r\n")
 #define RPL_ENDOFNAMES(client, nickname, chan_name) (":" + std::string(client) +" 366 " + std::string(nickname) + " " + std::string(chan_name) + " :End of /NAMES list\r\n")
+// #define PRL_UMODEIS(msg) (":irc.42 221 yourNick +iwx :+i")
 #define RPL_TOPIC(client, nickname, chan_name, topic) (":" + std::string(client) + " 332 " + std::string(nickname) + " " + std::string(chan_name) + " :" + std::string(topic) + "\r\n")
 
 // RPL_MYINFO
