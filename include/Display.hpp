@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/13 00:08:14 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/13 00:27:38 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 #define MESSAGE_CMD(nickname, username, hostname, targetnick, channel, cmd, message) (":" + std::string(nickname) + "!" + std::string(username) + "@" + std::string(hostname) + " " + std::string(cmd) + " " + std::string(channel) + " " + std::string(targetnick) + " :" + std::string(message) + "\r\n")
 #define MESSAGE_KICK(channel, nickname, msg) (":irc.42 KICK " + std::string(channel) + " " + std::string(nickname) + " :" + std::string(msg) + ".\r\n")
 #define RPL_JOIN(client, chan_name) (":" + std::string(client) + " JOIN :" + std::string(chan_name) + "\r\n")
+#define RPL_PART(client, nickname, chan_name) (":" + std::string(client) + " PART " + std::string(chan_name) + " :" + "\r\n")
 #define RPL_NAMEREPLY(client, nickname, chan_name, usernames) (":" + std::string(client) +" 353 " + std::string(nickname) + " = " + std::string(chan_name) + " :" + std::string(usernames) + "\r\n")
 #define RPL_ENDOFNAMES(client, nickname, chan_name) (":" + std::string(client) +" 366 " + std::string(nickname) + " " + std::string(chan_name) + " :End of /NAMES list\r\n")
 // #define PRL_UMODEIS(msg) (":irc.42 221 yourNick +iwx :+i")

@@ -57,16 +57,22 @@ void	Channel::setSizelimited(bool a)
 	_size_limited = a;
 }
 
-void	Channel::_delUser(User *user)
+void	Channel::addop(User *user)
+{
+	_ope.push_back(user);
+}
+
+bool	Channel::_delUser(User *user)
 {
 	for (std::vector<User*>::iterator it = _connected.begin(); it != _connected.end(); it++)
 	{
 		if ((*it)->getUserSd() == user->getUserSd())
 		{
 			_connected.erase(it);
-			return ;
+			return (true);
 		}
 	}
+	return (false);
 }
 
 User* Channel::_findUser(std::string name) const
@@ -101,9 +107,20 @@ std::string	Channel::getUsersString()
 		{
 			ret = ret + " ";
 		}
-		// if (op_channel)
-		// 	ret = ret + "@";
+		if (isop((*it)) == true)
+			ret = ret + "@";
 		ret = ret + (*it)->getNick();
 	}
 	return (ret);
+}
+
+bool	Channel::isop(User *user)
+{
+	std::vector<User*>::iterator it = _ope.begin();
+	for (; it != _ope.end(); it++)
+	{
+		if ((*it) == user)
+			return (true); 
+	}
+	return (false);
 }

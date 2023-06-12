@@ -35,9 +35,11 @@ class Channel
 		// setter
 		void	setName(std::string str);
 		void	setUserConnected(User *user);
+		void	addop(User *user);
 		void	setBan(User *user);
-		void	_delUser(User *user);
 		void	setSizelimited(bool a);
+		bool	_delUser(User *user);
+		bool	isop(User *user);
 
 	// private :
 	// 	void _convert_new();

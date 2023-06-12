@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 17:28:31 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/13 00:29:47 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,8 @@ size_t Server::_recvAll(pollfd pollfd) {
 			return _disconnectUser(_user_dict[pollfd.fd], 0);
 			return 1;
 		}
+		// test des lignes fragmenté
+		// std::cout << buffer << std::endl;
 		buffer[size] = 0;
 		_buff += buffer;
 		if (_buff.find('\n') != _buff.npos)
