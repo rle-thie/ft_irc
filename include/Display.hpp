@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 18:30:07 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:39:45 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 #define ERR_NOSUCHCHANNEL(nickname, channel) (":irc.42 403 " + std::string(nickname) + " " + std::string(channel) + " :No such channel\r\n")
 #define ERR_CHANOPRIVSNEEDED(nickname, channel) (":irc.42 482 " + std::string(nickname) + " " + std::string(channel) + " :You're not channel operator\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, channel, target) (":irc.42 441 " + std::string(nickname) + " " + std::string(target) + " " + std::string(channel) + " :They aren't on that channel\r\n")
+#define ERR_ALREADYJOINED ":irc.server 400 : Channel already joined\r\n"
+
 // REPLY
 #define RPL_YOUREOPER(nickname) (":irc.42 381 " + std::string(nickname) + " :You are now an IRC operator\r\n")
 #define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome a tous mes srabs wallah\r\n")
