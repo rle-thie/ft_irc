@@ -13,17 +13,12 @@ bool Server::_kick_cmd(User *user, std::string args)
 	{
 		std::string part = args.substr(startPos, spacePos - startPos);
 		if (part.find(':') != std::string::npos)
-		{
-			part.erase(part.find(':'));
 			break;
-		}
 		splitstring.push_back(part);
 		startPos = spacePos + 1;
 		spacePos = args.find(' ', startPos);
-		std::cout << part << std::endl;
 	}
-	std::string part = args.substr(startPos);
-	std::cout << part << std::endl;
+	std::string part = args.substr(startPos + 1);
 	splitstring.push_back(part);
 	if (splitstring.size() < 2)
 	{
@@ -55,10 +50,12 @@ bool Server::_kick_cmd(User *user, std::string args)
 	User *to_ban = _find_user(splitstring[1]);
 	ctarget->setBan(to_ban);
 	ctarget->_delUser(to_ban);
-	if (splitstring.size() > 2)
-		_sendError(to_ban, MESSAGE_CMD(user->getNick(), user->getUserName(), user->getHostName(), "KICK", to_ban->getNick(), splitstring[2]));
+	if (splitstring.size() > 2 && !splitstring[2].empty())
+	{
+		_sendRpl(to_ban, MESSAGE_KICK(splitstring[0], to_ban->getNick(), splitstring[2]));
+	}
 	else
-		_sendError(to_ban, MESSAGE_CMD(user->getNick(), user->getUserName(), user->getHostName(), "KICK", to_ban->getNick(), "You have been banned (sadge)"));
+		_sendRpl(to_ban, MESSAGE_KICK(splitstring[0], to_ban->getNick(), "You have been banned."));
 	return (true);
 }
 
