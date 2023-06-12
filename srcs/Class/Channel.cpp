@@ -3,6 +3,8 @@
 Channel::Channel(std::string name)
 {
 	_name = name;
+	_size_limited = false;
+	_maxsize = 2;
 }
 
 Channel::~Channel()
@@ -17,6 +19,12 @@ std::string	Channel::getName()
 int	Channel::getSizeConnected()
 {
 	return (_connected.size());
+}
+
+
+bool	Channel::getSizeLimited()
+{
+	return _size_limited;
 }
 
 std::vector<User*> &Channel::getUsers()
@@ -42,6 +50,11 @@ void	Channel::setUserConnected(User *user)
 void	Channel::setBan(User *user)
 {
 	_ban_list.push_back(user);
+}
+
+void	Channel::setSizelimited(bool a)
+{
+	_size_limited = a;
 }
 
 void	Channel::_delUser(User *user)

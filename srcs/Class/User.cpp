@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/12 19:08:02 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/12 23:49:41 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool const &User::getOpe() const
 	return _isope;
 }
 
-bool const &User::getOpe() const
+bool const &User::getChanOpe() const
 {
 	return _ischanope;
 }

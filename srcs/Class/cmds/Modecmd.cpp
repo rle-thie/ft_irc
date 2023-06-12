@@ -31,7 +31,7 @@ bool	Server::_mode_cmd(User *user, std::string args)
 		Channel *target = _find_channel(params[0]);
 		if(!target)
 			return (true);
-		if (params[1].size() != 2 || !params[1][0] == '+' || !params[1][0] == '-')
+		if (params[1].size() != 2 || params[1][0] != '+' || params[1][0] != '-')
 		{
 			_sendError(user, ERR_UMODEUNKNOWNFLAG(user->getNick()));
 			return (true);
@@ -39,10 +39,10 @@ bool	Server::_mode_cmd(User *user, std::string args)
 		switch (params[1][1])
 		{
 		case 'i':
-			if (params[1][0] == '+')
-				// target._setInvite(true);
-			else 
-				// target._setInvite(false);
+			// if (params[1][0] == '+')
+			// 	// target._setInvite(true);
+			// else 
+			// 	// target._setInvite(false);
 			break;
 		case 't':
 			/* code */
@@ -64,14 +64,16 @@ bool	Server::_mode_cmd(User *user, std::string args)
 	//mode sur user
 	else if (params[1] == "+o" || params[1] == "-o")
 	{
-
+		if(params[1] == "+o")
+			user->setChanOpe(true);
+		else
+			user->setChanOpe(true);
 	}
 	else
 	{
 		_sendError(user, ERR_UMODEUNKNOWNFLAG(user->getNick()));
 		return (true);
-	}
-	
+	}	
 	return(true);
 
 }

@@ -12,6 +12,8 @@ class Channel
 		std::vector<User*>	_connected;
 		std::vector<User*>	_ban_list;
 		std::vector<User*>	_ope;
+		bool				_size_limited;
+		int					_maxsize;
 		// std::string			_mode;
 	
 	public :
@@ -28,12 +30,14 @@ class Channel
 		std::vector<User*> &getUsersBan();
 		int					getSizeConnected();
 		std::string			getUsersString();
+		bool				getSizeLimited();
 
 		// setter
 		void	setName(std::string str);
 		void	setUserConnected(User *user);
 		void	setBan(User *user);
 		void	_delUser(User *user);
+		void	setSizelimited(bool a);
 
 	// private :
 	// 	void _convert_new();
