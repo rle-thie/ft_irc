@@ -44,8 +44,8 @@ void	Server::_joinRlp(User *user, Channel *chann)
 	{
 		_sendRpl((*it), RPL_JOIN(user->getClient(), chann->getName()));
 	}
-	// if (topic ?)
-	// 	send rpl topic
+	if (chann->getTopic() != "")
+		_sendRpl(user, RPL_TOPIC(user->getClient(), user->getNick(), chann->getName(), chann->getTopic()));
 	_sendRpl(user, RPL_NAMEREPLY(user->getClient(), user->getNick(), chann->getName(), chann->getUsersString()));
 	_sendRpl(user, RPL_ENDOFNAMES(user->getClient(), user->getNick(), chann->getName()));
 }
