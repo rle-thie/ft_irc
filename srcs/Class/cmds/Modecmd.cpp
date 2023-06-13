@@ -45,7 +45,10 @@ bool	Server::_mode_cmd(User *user, std::string args)
 				target->setInviteOnly(false);
 			break;
 		case 't':
-			/* code */
+			if (params[1][0] == '+')
+				target->setModeTopic(true);
+			else 
+				target->setModeTopic(false);
 			break;
 		case 'k':
 			/* code */
