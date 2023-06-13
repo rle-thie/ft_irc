@@ -13,6 +13,12 @@ Channel::~Channel()
 {
 }
 
+
+std::vector<User*> &Channel::getOpeChan()
+{
+	return _opechan;
+}
+
 std::string	Channel::getName()
 {
 	return (_name);
@@ -52,6 +58,37 @@ void	Channel::setUserConnected(User *user)
 void	Channel::setBan(User *user)
 {
 	_ban_list.push_back(user);
+}
+
+
+void	Channel::_addOpeChan(User *user)
+{
+	_opechan.push_back(user);
+}
+
+
+void	Channel::_dellOpeChan(User *user)
+{
+	for (std::vector<User*>::iterator it = _opechan.begin(); it != _opechan.end(); it++)
+	{
+		if ((*it)->getUserSd() == user->getUserSd())
+		{
+			_opechan.erase(it);
+			return;
+		}
+	}
+	return;
+}
+
+bool	Channel::_isOpeChan(User *user)
+{
+	std::vector<User *>::const_iterator ite = _opechan.begin();
+	for (; ite != _opechan.end(); ite++)
+	{
+		if ((*ite)->getNick() == user->getNick())
+			return(true);
+	}
+	return(false);
 }
 
 void	Channel::addop(User *user)

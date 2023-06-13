@@ -12,6 +12,7 @@ class Channel
 		std::vector<User*>	_connected;
 		std::vector<User*>	_ban_list;
 		std::vector<User*>	_ope;
+		std::vector<User*>	_opechan;
 		std::string			_topic;
 		bool				_modeTopicOp;
 		bool				_inviteOnly;
@@ -31,6 +32,7 @@ class Channel
 		std::string			getName();
 		std::vector<User*> &getUsers();
 		std::vector<User*> &getUsersBan();
+		std::vector<User*> &getOpeChan();
 		int					getSizeConnected();
 		std::string			getUsersString();
 		std::string			getTopic();
@@ -47,6 +49,10 @@ class Channel
 		void	setTopic(std::string str);
 		void	setModeTopic(bool b);
 		void	setSizelimited(bool a);
+		
+		void	_addOpeChan(User *user);
+		void	_dellOpeChan(User *user);
+		bool	_isOpeChan(User *user);
 
 	// private :
 	// 	void _convert_new();

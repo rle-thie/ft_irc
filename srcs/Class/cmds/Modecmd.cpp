@@ -69,10 +69,12 @@ bool	Server::_mode_cmd(User *user, std::string args)
 				_sendError(user, ERR_USERNOTINCHANNEL(user->getNick(), params[0], params[2]));
 				return (true);			
 			}
-			if (params[1][0] == '+')
-				targetuser->setChanOpe(true);
+			if (params[1][0] == '+' && !target->_isOpeChan(targetuser))
+				target->_addOpeChan(user);
+			else if (params[1][0] == '-' && target->_isOpeChan(targetuser))
+				target->_dellOpeChan(targetuser);
 			else 
-				targetuser->setChanOpe(false);
+				return (true);
 			break;
 		}
 		default:
