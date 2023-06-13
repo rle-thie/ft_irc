@@ -22,7 +22,7 @@ bool Server::_topic_cmd(User *user, std::string args)
 			_sendError(user, ERR_NOTONCHANNEL(user->getNick(), chann->getName()));
 			return (false);
 		}
-		if (chann->isop(user) == false && chann->getModeTopic() == true)
+		if (chann->getModeTopic() == true && chann->isop(user) == false)
 		{
 			_sendError(user, ERR_CHANOPRIVSNEEDED(chann->getName()));
 			return (false);
