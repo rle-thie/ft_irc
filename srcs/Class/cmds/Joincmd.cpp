@@ -26,10 +26,15 @@ bool	Server::_join_cmd(User *user, std::string args)
 			_sendError(user, ERR_ALREADYJOINED);
 			return (false);
 		}
-		std::cout << "channel deja existant" << std::endl;
+		std::cout << "[DEBUG] channel deja existant" << std::endl;
 		if (chan->getSizeLimited() && chan->getSizeConnected() >= 2)
 		{
 			_sendError(user, ERR_CHANNELISFULL(user->getNick(), chan->getName()));
+			return (true);
+		}
+		if (chan->getInviteOnly() == true && user->getInvitedChann(chan) == false)
+		{
+			_sendError(user, ERR_INVITEONLYCHAN(chan->getName()));
 			return (true);
 		}
 		chan->setUserConnected(user);

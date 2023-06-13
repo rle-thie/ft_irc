@@ -34,7 +34,7 @@ bool Server::_kick_cmd(User *user, std::string args)
 	//il faut ajouter le channel admin a la condition
 	if (!user->getOpe())
 	{
-		_sendError(user, ERR_CHANOPRIVSNEEDED(user->getNick(), splitstring[0]));
+		_sendError(user, ERR_CHANOPRIVSNEEDED(splitstring[0]));
 		return (true);
 	}
 	if (!ctarget->_findUser(splitstring[1]))

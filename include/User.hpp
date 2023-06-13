@@ -18,6 +18,7 @@ class User
 		bool					_isope;
 		bool					_ischanope;
 		std::vector<Channel*>	_channel_joined;
+		std::vector<Channel*>	_channel_invited;
 	
 	public :
 		User(int socket_desc, std::string hostname);
@@ -34,6 +35,7 @@ class User
 		bool const			&getCap() const;
 		bool const			&getOpe() const;
 		bool const			&getChanOpe() const;
+		bool				getInvitedChann(Channel *chann);
 
 		void				setPass(std::string str);
 		void				setNick(std::string str);
@@ -43,6 +45,7 @@ class User
 		void				setOpe(bool a);
 		void				setChanOpe(bool a);
 
+		void				addInviteChannel(Channel *channel);
 		void				addChannel(Channel *channelToAdd);
 
 		~User();

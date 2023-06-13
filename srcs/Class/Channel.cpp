@@ -183,3 +183,13 @@ void	Channel::setModeTopic(bool b)
 {
 	_modeTopicOp = b;
 }
+
+bool	Channel::getInviteOnly()
+{
+	return (_inviteOnly);
+}
+
+void	Channel::setInviteOnly(bool b)
+{
+	_inviteOnly = b;
+}

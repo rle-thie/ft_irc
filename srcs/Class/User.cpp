@@ -136,6 +136,26 @@ void	User::addChannel(Channel *channelToAdd)
 	_channel_joined.push_back(channelToAdd);
 }
 
+void	User::addInviteChannel(Channel *channel)
+{
+	_channel_invited.push_back(channel);
+}
+
+bool	User::getInvitedChann(Channel *chann)
+{
+	bool b = false;
+	std::vector<Channel*>::iterator it = _channel_invited.begin();
+	for(; it != _channel_invited.end(); it++)
+	{
+		if ((*it) == chann)
+		{
+			b = true;
+			_channel_invited.erase(it);
+		}
+	}
+	return b;
+}
+
 User::~User()
 {
 }

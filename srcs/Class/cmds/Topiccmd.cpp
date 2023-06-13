@@ -24,7 +24,7 @@ bool Server::_topic_cmd(User *user, std::string args)
 		}
 		if (chann->isop(user) == false && chann->getModeTopic() == true)
 		{
-			_sendError(user, ERR_CHANOPRIVSNEEDED(user->getNick(), chann->getName()));
+			_sendError(user, ERR_CHANOPRIVSNEEDED(chann->getName()));
 			return (false);
 		}
 		std::string::size_type space = topic.find(" ");

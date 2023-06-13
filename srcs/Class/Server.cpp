@@ -33,7 +33,7 @@ Server::Server(char *cport, std::string pswd)
 	_cmdmap["QUIT"] = &Server::_quit_cmd;
 	_cmdmap["KICK"] = &Server::_kick_cmd;
 	_cmdmap["PRIVMSG"] = &Server::_privmsg_cmd;
-	// _cmdmap["INVITE"] = &Server::_invite_cmd;
+	_cmdmap["INVITE"] = &Server::_invite_cmd;
 	_cmdmap["PING"] = &Server::_ping_cmd;
 	_cmdmap["TOPIC"] = &Server::_topic_cmd;
 	_creation_time = _current_time();

@@ -49,14 +49,19 @@
 #define ERR_NOTONCHANNEL(nickname, channel) (":irc.42 442 " + std::string(nickname) + " " + std::string(channel) + " :You're not on that channel\r\n")
 //	err cmd kick
 #define ERR_NOSUCHCHANNEL(nickname, channel) (":irc.42 403 " + std::string(nickname) + " " + std::string(channel) + " :No such channel\r\n")
-#define ERR_CHANOPRIVSNEEDED(nickname, channel) (":irc.42 482 " + std::string(nickname) + " " + std::string(channel) + " :You're not channel operator\r\n")
+#define ERR_CHANOPRIVSNEEDED(channel) (":irc.42 482 " + std::string(channel) + " :You're not channel operator\r\n")
 #define ERR_USERNOTINCHANNEL(nickname, channel, target) (":irc.42 441 " + std::string(nickname) + " " + std::string(target) + " " + std::string(channel) + " :They aren't on that channel\r\n")
 // err cmd 
 #define ERR_USERSDONTMATCH(nickname) (":irc.42 502 " + std::string(nickname) + " :Cannot change mode for other users\r\n")
 #define ERR_UMODEUNKNOWNFLAG(nickname) (":irc.42 501 " + std::string(nickname) + " :Unknown MODE flag\r\n")
 // err join
 #define ERR_CHANNELISFULL(nickname, channel) (":irc.42 501 " + std::string(nickname) + " " + std::string(channel) + " :Cannot join channel (+l)\r\n")
-#define ERR_ALREADYJOINED ":irc.server 400 : Channel already joined\r\n"
+#define ERR_ALREADYJOINED ":irc.42 400 : Channel already joined\r\n"
+#define ERR_INVITEONLYCHAN(channel) (":irc.42 473 " + std::string(channel) + " :Cannot join channel (+i)\r\n")
+// err invite
+#define ERR_INVITEALREADYJOINED ":irc.42 400 : User already joined the channel\r\n"
+#define ERR_NOTINVITEMODE ":irc.42 400 : channel is not on invite only mode\r\n"
+#define ERR_USERONCHANNEL(nickname, channel) (":irc.42 443 " + std::string(nickname) + " " + std::string(channel) + " :is already on channel\r\n")
 //err mode 
 
 
@@ -79,6 +84,8 @@
 #define RPL_ENDOFNAMES(client, nickname, chan_name) (":" + std::string(client) +" 366 " + std::string(nickname) + " " + std::string(chan_name) + " :End of /NAMES list\r\n")
 // #define PRL_UMODEIS(msg) (":irc.42 221 yourNick +iwx :+i")
 #define RPL_TOPIC(client, nickname, chan_name, topic) (":" + std::string(client) + " 332 " + std::string(nickname) + " " + std::string(chan_name) + " :" + std::string(topic) + "\r\n")
+#define RPL_INVITE(invite_nick, chan_name) (":irc.42 341 INVITE " + std::string(invite_nick) + " " + std::string(chan_name) + "\r\n")
+#define RPL_INVITED(invite_nick, chan_name) (":irc.42 400 :" + std::string(invite_nick) + " invited you on the channel " + std::string(chan_name) + "\r\n")
 
 // RPL_MYINFO
 // "irc.server" est le nom du serveur IRC.

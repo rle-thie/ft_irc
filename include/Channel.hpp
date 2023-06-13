@@ -38,6 +38,7 @@ class Channel
 		std::string			getTopic();
 		bool				getModeTopic();
 		bool				getSizeLimited();
+		bool				getInviteOnly();
 
 		// setter
 		void	setName(std::string str);
@@ -49,6 +50,7 @@ class Channel
 		void	setTopic(std::string str);
 		void	setModeTopic(bool b);
 		void	setSizelimited(bool a);
+		void	setInviteOnly(bool b);
 		
 		void	_addOpeChan(User *user);
 		void	_dellOpeChan(User *user);
