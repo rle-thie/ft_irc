@@ -39,10 +39,10 @@ bool	Server::_mode_cmd(User *user, std::string args)
 		switch (mode)
 		{
 		case 'i':
-			// if (params[1][0] == '+')
-			// 	// target._setInvite(true);
-			// else 
-			// 	// target._setInvite(false);
+			if (params[1][0] == '+')
+				target->setInviteOnly(true);
+			else 
+				target->setInviteOnly(false);
 			break;
 		case 't':
 			/* code */
