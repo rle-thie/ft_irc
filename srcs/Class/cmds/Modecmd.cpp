@@ -30,6 +30,13 @@ bool	Server::_mode_cmd(User *user, std::string args)
 		Channel *target = _find_channel(params[0]);
 		if(!target)
 			return (true);
+		if (target->_isOpeChan(user))
+			std::cout << "je suis chan op" << std::endl;
+		if (!(user->getOpe() || target->_isOpeChan(user)))
+		{
+			_sendError(user, ERR_CHANOPRIVSNEEDED(params[0]));
+			return (true);
+		}
 		if (params[1].size() != 2 || (params[1][0] != '+' && params[1][0] != '-'))
 		{
 			_sendError(user, ERR_UMODEUNKNOWNFLAG(user->getNick()));

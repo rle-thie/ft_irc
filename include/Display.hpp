@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:15:44 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/13 01:28:41 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/14 16:49:48 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 #define ERR_NOTINVITEMODE ":irc.42 400 : channel is not on invite only mode\r\n"
 #define ERR_USERONCHANNEL(nickname, channel) (":irc.42 443 " + std::string(nickname) + " " + std::string(channel) + " :is already on channel\r\n")
 //err mode 
+
 
 
 // REPLY
