@@ -193,6 +193,10 @@ bool	Channel::getInviteOnly()
 
 void	Channel::setInviteOnly(bool b)
 {
+	if (b == true)
+		std::cout << "[DEBUG] set invite only mode" << std::endl;
+	else
+		std::cout << "[DEBUG] remove invite only mode" << std::endl;
 	_inviteOnly = b;
 }
 
