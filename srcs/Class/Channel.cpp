@@ -7,6 +7,8 @@ Channel::Channel(std::string name)
 	_maxsize = 2;
 	_modeTopicOp = true;
 	_inviteOnly = false;
+	_modeChannelkey = false;
+	_key = "secret";
 }
 
 Channel::~Channel()
@@ -192,4 +194,24 @@ bool	Channel::getInviteOnly()
 void	Channel::setInviteOnly(bool b)
 {
 	_inviteOnly = b;
+}
+
+void	Channel::setModeKey(bool b)
+{
+	_modeChannelkey = b;
+}
+
+bool	Channel::getModeKey()
+{
+	return (_modeChannelkey);
+}
+
+std::string	Channel::getKey()
+{
+	return (_key);
+}
+
+void	Channel::setKey(std::string str)
+{
+	_key = str;
 }

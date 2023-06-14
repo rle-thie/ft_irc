@@ -57,6 +57,7 @@ class Server
 		void		_delUserFromAllChann(User *user);
 		void		_delEmptyChannels();
 		std::string	_current_time();
+		std::vector<std::pair<std::string, std::string> > strtovec(std::string buff);
 
 		//cmds 
 		std::map<std::string, bool (Server::*) (User *,std::string)> _cmdmap;

@@ -58,6 +58,8 @@
 #define ERR_CHANNELISFULL(nickname, channel) (":irc.42 501 " + std::string(nickname) + " " + std::string(channel) + " :Cannot join channel (+l)\r\n")
 #define ERR_ALREADYJOINED ":irc.42 400 : Channel already joined\r\n"
 #define ERR_INVITEONLYCHAN(channel) (":irc.42 473 " + std::string(channel) + " :Cannot join channel (+i)\r\n")
+#define ERR_INVALIDKEY(channel) (":irc.42 525 " + std::string(channel) + " :Key is not well-formed\r\n")
+#define ERR_BADCHANNELKEY(channel) (":irc.42 475 " + std::string(channel) + " :Cannot join channel (+k)\r\n")
 // err invite
 #define ERR_INVITEALREADYJOINED ":irc.42 400 : User already joined the channel\r\n"
 #define ERR_NOTINVITEMODE ":irc.42 400 : channel is not on invite only mode\r\n"

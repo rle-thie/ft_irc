@@ -51,7 +51,10 @@ bool	Server::_mode_cmd(User *user, std::string args)
 				target->setModeTopic(false);
 			break;
 		case 'k':
-			/* code */
+			if (params[1][0] == '+')
+				target->setModeKey(true);
+			else 
+				target->setModeKey(false);
 			break;
 		case 'l':
 			if (params[1][0] == '+')

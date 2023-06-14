@@ -89,7 +89,7 @@ void	Server::init(void)
 	}
 	freeaddrinfo(info_server);
 	// 30 = nbrs de connexion en attente
-	if (listen(_sd, 30) == -1)
+	if (listen(_sd, 10) == -1)
 	{
 		throw Exception::listen();
 	}

@@ -144,15 +144,31 @@ void	User::addInviteChannel(Channel *channel)
 bool	User::getInvitedChann(Channel *chann)
 {
 	bool b = false;
-	std::vector<Channel*>::iterator it = _channel_invited.begin();
-	for(; it != _channel_invited.end(); it++)
+	bool end = false;
+	while (end == false)
 	{
-		if ((*it) == chann)
+		std::vector<Channel*>::iterator it = _channel_invited.begin();
+		for(; it != _channel_invited.end(); it++)
 		{
-			b = true;
-			_channel_invited.erase(it);
+			if ((*it) == chann)
+			{
+				b = true;
+				_channel_invited.erase(it);
+				end = false;
+				break;
+			}
+			end = true;
 		}
 	}
+	std::vector<Channel*>::iterator it = _channel_invited.begin();
+	it = _channel_invited.begin();
+	std::cout << "invite : ";
+	for(; it != _channel_invited.end(); it++)
+	{
+		std::cout << (*it)->getName() << " ";
+	}
+	std::cout << std::endl;
+
 	return b;
 }
 
