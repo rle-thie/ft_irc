@@ -53,7 +53,7 @@ bool Server::_privmsg_cmd(User *user, std::string args)
 			_sendError(user, ERR_NOTONCHANNEL(user->getNick(), target));
 			return(true);
 		}
-		if (_find_channel(target)->_am_i_banned(user->getNick()))
+		if (_find_channel(target)->_am_i_banned(user))
 		{
 			_sendError(user, ERR_CANNOTSENDTOCHAN(user->getNick(), "target"));
 			return (true);
@@ -62,8 +62,8 @@ bool Server::_privmsg_cmd(User *user, std::string args)
 		std::vector<User *> targets = ctarget->getUsers();
 		for (ite = targets.begin(); ite != targets.end(); ite++)
 		{
-			if ((*ite) != user && !_find_channel(target)->_am_i_banned((*ite)->getNick()))
-			_sendRpl((*ite), MESSAGE(user->getNick(), user->getUserName(), user->getHostName(), target, msg));
+			if ((*ite) != user && !_find_channel(target)->_am_i_banned(*ite))
+				_sendRpl((*ite), MESSAGE(user->getNick(), user->getUserName(), user->getHostName(), target, msg));
 		}
 		return (true);
 

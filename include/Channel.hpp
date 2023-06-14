@@ -27,7 +27,7 @@ class Channel
 
 		//util 
 		User*	_findUser(std::string name) const;
-		bool	_am_i_banned(std::string name);
+		bool	_am_i_banned(User *user);
 
 		// getter
 		std::string			getName();

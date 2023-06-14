@@ -128,12 +128,12 @@ User* Channel::_findUser(std::string name) const
 }
 
 
-bool Channel::_am_i_banned(std::string name)
+bool Channel::_am_i_banned(User *user)
 {
 	std::vector<User *>::const_iterator ite = _ban_list.begin();
 	for (; ite != _ban_list.end(); ite++)
 	{
-		if ((*ite)->getNick() == name)
+		if ((*ite) == user)
 			return(true);
 	}
 	return(false);
