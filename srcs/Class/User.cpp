@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/14 16:57:21 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:15:31 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,34 +143,38 @@ void	User::addInviteChannel(Channel *channel)
 
 bool	User::getInvitedChann(Channel *chann)
 {
-	bool b = false;
-	bool end = false;
-	while (end == false)
-	{
-		std::vector<Channel*>::iterator it = _channel_invited.begin();
-		for(; it != _channel_invited.end(); it++)
-		{
-			if ((*it) == chann)
-			{
-				b = true;
-				_channel_invited.erase(it);
-				end = false;
-				break;
-			}
-			end = true;
-		}
-		end = true;
-	}
 	std::vector<Channel*>::iterator it = _channel_invited.begin();
-	it = _channel_invited.begin();
-	std::cout << "invite : ";
 	for(; it != _channel_invited.end(); it++)
 	{
-		std::cout << (*it)->getName() << " ";
+		if ((*it) == chann)
+		{
+			_channel_invited.erase(it);
+			return (true);
+		}
 	}
-	std::cout << std::endl;
+	// std::vector<Channel*>::iterator it = _channel_invited.begin();
+	// it = _channel_invited.begin();
+	// std::cout << "invite : ";
+	// for(; it != _channel_invited.end(); it++)
+	// {
+	// 	std::cout << (*it)->getName() << " ";
+	// }
+	// std::cout << std::endl;
 
-	return b;
+	return (false);
+}
+
+bool	User::isAlreadyInvited(Channel *chann)
+{
+	std::vector<Channel*>::iterator it = _channel_invited.begin();
+	for(; it != _channel_invited.end(); it++)
+	{
+		if ((*it) == chann)
+		{
+			return (true);
+		}
+	}
+	return (false);
 }
 
 User::~User()

@@ -36,6 +36,7 @@ class User
 		bool const			&getOpe() const;
 		bool const			&getChanOpe() const;
 		bool				getInvitedChann(Channel *chann);
+		bool				isAlreadyInvited(Channel *chann);
 
 		void				setPass(std::string str);
 		void				setNick(std::string str);

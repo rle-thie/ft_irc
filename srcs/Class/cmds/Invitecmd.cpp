@@ -39,6 +39,11 @@ bool Server::_invite_cmd(User *user, std::string args)
 			_sendError(user, ERR_USERONCHANNEL(invite_user->getNick(), chann->getName()));
 			return (false);
 		}
+		if (invite_user->isAlreadyInvited(chann) == true)
+		{
+			_sendError(user, ERR_USERALREADYINVITE(invite_user->getNick(), chann->getName()));
+			return (false);
+		}
 		invite_user->addInviteChannel(chann);
 		_sendRpl(user, RPL_INVITE(invite_user->getNick(), chann->getName()));
 		_sendRpl(invite_user, RPL_INVITED(user->getNick(), chann->getName()));
