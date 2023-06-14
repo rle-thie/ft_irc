@@ -24,6 +24,7 @@ bool	Server::_join_cmd(User *user, std::string args)
 			newChannel->addop(user);
 			if (key != "")
 				newChannel->setKey(key);
+			std::cout << "[DEBUG] create new channel..." << std::endl;
 			_joinRlp(user, newChannel);
 		}
 		else
@@ -41,6 +42,7 @@ bool	Server::_join_cmd(User *user, std::string args)
 				// return (true);
 				continue;
 			}
+			std::cout << "tttttttttttt" << std::endl;
 			if (chan->getInviteOnly() == true && user->getInvitedChann(chan) == false)
 			{
 				_sendError(user, ERR_INVITEONLYCHAN(chan->getName()));
@@ -78,7 +80,7 @@ void	Server::_joinRlp(User *user, Channel *chann)
 	if (chann->getTopic() != "")
 		_sendRpl(user, RPL_TOPIC(user->getClient(), user->getNick(), chann->getName(), chann->getTopic()));
 	_sendRpl(user, RPL_NAMEREPLY(user->getClient(), user->getNick(), chann->getName(), chann->getUsersString()));
-	// _sendRpl(user, RPL_ENDOFNAMES(user->getClient(), user->getNick(), chann->getName()));
+	_sendRpl(user, RPL_ENDOFNAMES(user->getClient(), user->getNick(), chann->getName()));
 }
 
 std::vector<std::pair<std::string, std::string> > Server::strtovec(std::string buff)
