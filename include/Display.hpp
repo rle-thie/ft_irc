@@ -77,6 +77,7 @@
 #define RPL_MYINFO(client, nickname) (":" + std::string(client) + " 004 " + std::string(nickname) + " :irc.server 1.0 io kl\r\n")
 #define RPL_GOODPASS GREEN "Connection accepted !" RESET "\r\n"
 #define RPL_NICKSUCCES(nick) ("You're now known as " + std::string(nick) + "!\r\n")
+#define RPL_NICK(old_nick, nickname) (":" + std::string(old_nick) + " NICK " + std::string(nickname) + "\r\n")
 #define RPL_PONG(args) ("PONG " + std::string(args) + "\r\n")
 #define RPL_PONGEMPTY "PONG\r\n"
 #define MESSAGE(nickname, username, hostname, targetnick, message) (":" + std::string(nickname) + "!" + std::string(username) + "@" + std::string(hostname) + " PRIVMSG " + std::string(targetnick) + " :" + std::string(message) + "\r\n")

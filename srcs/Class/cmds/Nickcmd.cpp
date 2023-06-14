@@ -15,8 +15,9 @@ bool Server::_nick_cmd(User *user, std::string args)
 			_sendError(user, ERR_NICKNAMEINUSE(args));
 			return (false);
 		}
+		std::string old = user->getNick();
 		user->setNick(args);
-		_sendRpl(user, RPL_NICKSUCCES(args));
+		_sendRpl(user, RPL_NICK(old, args));
 	}
 	else
 	{
@@ -34,8 +35,9 @@ bool Server::_nick_cmd(User *user, std::string args)
 				_disconnectUser(user, 1);
 				return (false);
 			}
+			std::string old = user->getNick();
 			user->setNick(args);
-			_sendRpl(user, RPL_NICKSUCCES(args));
+			_sendRpl(user, RPL_NICK(old, args));
 		}
 	}
 	return (true);
