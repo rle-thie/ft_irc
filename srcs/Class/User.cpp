@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   User.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:53:46 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/13 00:01:16 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/14 16:57:21 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ bool	User::getInvitedChann(Channel *chann)
 			}
 			end = true;
 		}
+		end = true;
 	}
 	std::vector<Channel*>::iterator it = _channel_invited.begin();
 	it = _channel_invited.begin();
