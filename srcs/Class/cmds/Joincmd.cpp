@@ -78,8 +78,8 @@ void	Server::_joinRlp(User *user, Channel *chann)
 	}
 	if (chann->getTopic() != "")
 		_sendRpl(user, RPL_TOPIC(user->getClient(), user->getNick(), chann->getName(), chann->getTopic()));
-	_sendRpl(user, RPL_NAMEREPLY(user->getClient(), user->getNick(), chann->getName(), chann->getUsersString()));
-	_sendRpl(user, RPL_ENDOFNAMES(user->getClient(), user->getNick(), chann->getName()));
+	// _sendRpl(user, RPL_NAMEREPLY(user->getClient(), user->getNick(), chann->getName(), chann->getUsersString()));
+	// _sendRpl(user, RPL_ENDOFNAMES(user->getClient(), user->getNick(), chann->getName()));
 }
 
 std::vector<std::pair<std::string, std::string> > Server::strtovec(std::string buff)
