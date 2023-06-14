@@ -11,7 +11,7 @@ class Channel
 		std::string			_name;
 		std::vector<User*>	_connected;
 		std::vector<User*>	_ban_list;
-		std::vector<User*>	_ope;
+		// std::vector<User*>	_ope;
 		std::vector<User*>	_opechan;
 		std::string			_topic;
 		bool				_modeTopicOp;

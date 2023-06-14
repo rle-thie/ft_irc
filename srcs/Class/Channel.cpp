@@ -95,7 +95,7 @@ bool	Channel::_isOpeChan(User *user)
 
 void	Channel::addop(User *user)
 {
-	_ope.push_back(user);
+	_opechan.push_back(user);
 }
 
 void	Channel::setSizelimited(bool a)
@@ -157,8 +157,8 @@ std::string	Channel::getUsersString()
 
 bool	Channel::isop(User *user)
 {
-	std::vector<User*>::iterator it = _ope.begin();
-	for (; it != _ope.end(); it++)
+	std::vector<User*>::iterator it = _opechan.begin();
+	for (; it != _opechan.end(); it++)
 	{
 		if ((*it) == user)
 			return (true); 

@@ -42,13 +42,6 @@ bool	Server::_join_cmd(User *user, std::string args)
 				// return (true);
 				continue;
 			}
-			std::cout << "tttttttttttt" << std::endl;
-			if (chan->getInviteOnly() == true && user->getInvitedChann(chan) == false)
-			{
-				_sendError(user, ERR_INVITEONLYCHAN(chan->getName()));
-				// return (true);
-				continue;
-			}
 			if (chan->getModeKey() == true && key == "")
 			{
 				_sendError(user, ERR_BADCHANNELKEY(chan->getName()));
@@ -57,6 +50,12 @@ bool	Server::_join_cmd(User *user, std::string args)
 			if (chan->getModeKey() == true && key != chan->getKey())
 			{
 				_sendError(user, ERR_INVALIDKEY(chan->getName()));
+				continue;
+			}
+			if (chan->getInviteOnly() == true && user->getInvitedChann(chan) == false)
+			{
+				_sendError(user, ERR_INVITEONLYCHAN(chan->getName()));
+				// return (true);
 				continue;
 			}
 			chan->setUserConnected(user);
