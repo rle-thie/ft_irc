@@ -6,7 +6,7 @@
 /*   By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:24:07 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/05 19:17:19 by rle-thie         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:21:22 by rle-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	parser(int ac, char **av)
 
 int main(int ac, char **av)
 {
-
+	if (ac != 3)
+		return (0);
 	if (parser(ac, av))
 		return (1);
 	Server *irc = new Server(av[1], av[2]);
@@ -69,6 +70,7 @@ int main(int ac, char **av)
 		std::cerr << "Error\nServer cannot init" << '\n';
 		std::cerr << e.what() << '\n';
 		delete irc;
+		return (0);
 	}
 	while (run == true)
 	{
