@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rle-thie <rle-thie@student.42.fr>          +#+  +:+       +#+         #
+#    By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 08:42:57 by arudy             #+#    #+#              #
-#    Updated: 2023/06/12 17:15:22 by rle-thie         ###   ########.fr        #
+#    Updated: 2023/06/14 18:37:19 by ldevy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ RM		= rm -rf
 
 MKDIR	= mkdir -p
 
-CFLAGS	= -Wall -Werror -Wextra -pedantic -std=c++98
+CFLAGS	= -Wall -Werror -Wextra -pedantic -std=c++98 -g3
 
 all: $(NAME)
 

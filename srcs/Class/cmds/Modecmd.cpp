@@ -31,7 +31,6 @@ bool	Server::_mode_cmd(User *user, std::string args)
 		if(!target)
 			return (true);
 		if (target->_isOpeChan(user))
-			std::cout << "je suis chan op" << std::endl;
 		if (!(user->getOpe() || target->_isOpeChan(user)))
 		{
 			_sendError(user, ERR_CHANOPRIVSNEEDED(params[0]));
@@ -76,14 +75,14 @@ bool	Server::_mode_cmd(User *user, std::string args)
 				_sendError(user, ERR_NEEDMOREPARAMS("MODE", user->getNick()));
 				return (true);
 			}
-			User *targetuser = target->_findUser(params[3]);
+			User *targetuser = target->_findUser(params[2]);
 			if (!targetuser)
 			{
 				_sendError(user, ERR_USERNOTINCHANNEL(user->getNick(), params[0], params[2]));
 				return (true);			
 			}
 			if (params[1][0] == '+' && !target->_isOpeChan(targetuser))
-				target->_addOpeChan(user);
+				target->_addOpeChan(targetuser);
 			else if (params[1][0] == '-' && target->_isOpeChan(targetuser))
 				target->_dellOpeChan(targetuser);
 			else 
