@@ -3,7 +3,8 @@
 bool Server::_topic_cmd(User *user, std::string args)
 {
 	std::cout << "[DEBUG] topic cmd " << args << std::endl;
-	user = user;
+	// user = user;
+
 	std::string myString = args;
     std::string::size_type spacePos = myString.find(" :");
 

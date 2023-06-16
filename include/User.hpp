@@ -11,7 +11,7 @@ class User
 		bool					_first_try;
 		std::string				_nick;
 		std::string				_host_name;
-		bool					_tried_to_auth;
+		// bool					_tried_to_auth;
 		bool					_auth;
 		std::string				_pwd;
 		bool					_cap;
@@ -57,3 +57,4 @@ class User
 };
 
 #endif
+

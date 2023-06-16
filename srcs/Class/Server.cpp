@@ -6,7 +6,7 @@
 /*   By: ldevy <ldevy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:57:16 by rle-thie          #+#    #+#             */
-/*   Updated: 2023/06/13 00:39:05 by ldevy            ###   ########.fr       */
+/*   Updated: 2023/06/16 13:14:08 by ldevy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	Server::init(void)
 	addrinfo	*tmp = NULL;
 	int			optval = 1;
 
-	tmp=tmp;
+	// tmp=tmp;
 
 	memset(&hints, 0, sizeof(hints));
 	// La valeur AF_UNSPEC indique que getaddrinfo() doit renvoyer les adresses de socket de n'importe quelle famille d'adresses (par exemple, IPv4 ou IPv6) pouvant être utilisées avec node et service.
@@ -290,8 +290,8 @@ int Server::_fillRecvs(std::string buff)
 
 int Server::_acceptConnection(User *user, std::pair<std::string, std::string> cmd)
 {
-	user = user;
-	cmd = cmd;
+	// user = user;
+	// cmd = cmd;
 	bool ret = true;
 	
 	std::map<std::string, bool (Server::*)(User *, std::string)>::iterator iter;
@@ -325,4 +325,5 @@ Channel* Server::_find_channel(std::string str)
 			return(*ite);
 	}
 	return(NULL);
-} 
+}
+
