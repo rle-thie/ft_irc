@@ -1,5 +1,11 @@
 #include "../../../include/Irc.hpp"
 
+static bool containsSpace(const std::string& input)
+{
+    std::string::size_type spacePos = input.find(' ');
+    return (spacePos != std::string::npos);
+}
+
 bool Server::_nick_cmd(User *user, std::string args)
 {
 	std::cout << "[DEBUG] Nick stocked : " << args << std::endl;
@@ -13,6 +19,11 @@ bool Server::_nick_cmd(User *user, std::string args)
 		if (_find_user(args) != NULL)
 		{
 			_sendError(user, ERR_NICKNAMEINUSE(args));
+			return (false);
+		}
+		if (containsSpace(args))
+		{
+			_sendError(user, ERR_WRONGNICKNAME);
 			return (false);
 		}
 		std::string old = user->getNick();
@@ -32,6 +43,12 @@ bool Server::_nick_cmd(User *user, std::string args)
 			if (_find_user(args) != NULL)
 			{
 				_sendError(user, ERR_NICKNAMEINUSE(args));
+				_disconnectUser(user, 1);
+				return (false);
+			}
+			if (containsSpace(args))
+			{
+				_sendError(user, ERR_WRONGNICKNAME);
 				_disconnectUser(user, 1);
 				return (false);
 			}

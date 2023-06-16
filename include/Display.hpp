@@ -35,6 +35,7 @@
 // err de la cmd NICK
 #define ERR_NONICKNAMEGIVEN(nickname) (":irc.42 431 " + std::string(nickname) + " :No nickname given\r\n")
 #define ERR_NICKNAMEINUSE(nickname) (":433 " + std::string(nickname) + " :Nickname is already in use\r\n")
+#define ERR_WRONGNICKNAME ":irc.42 400 : Wrong nickname\r\n"
 // err cmd USER
 #define ERR_ALREADYREGISTRED(nickname) (":irc.42 462 " + std::string(nickname) + " :Unauthorized command (already registered)\r\n")
 // err cmd OPER
@@ -71,7 +72,7 @@
 
 // REPLY
 #define RPL_YOUREOPER(nickname) (":irc.42 381 " + std::string(nickname) + " :You are now an IRC operator\r\n")
-#define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome a tous mes srabs wallah\r\n")
+#define RPL_WELCOME(client, nickname) (":" + std::string(client) + " 001 " + std::string(nickname) + " :Welcome to our irc server\r\n")
 #define RPL_YOURHOST(client, nickname) (":" + std::string(client) + " 002 " + std::string(nickname) + " :Your host is irc.42\r\n")
 #define RPL_CREATED(client, nickname, crea_time) (":" + std::string(client) + " 003 " + std::string(nickname) + " :Server was created " + std::string(crea_time) + " \r\n")
 #define RPL_MYINFO(client, nickname) (":" + std::string(client) + " 004 " + std::string(nickname) + " :irc.server 1.0 io kl\r\n")
