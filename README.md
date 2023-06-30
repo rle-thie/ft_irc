@@ -1,6 +1,7 @@
 # Projet Server IRC 42
 
 Ce projet est un serveur IRC basique qui permet aux utilisateurs de communiquer en temps réel via Internet en utilisant le protocole Internet Relay Chat (IRC).
+Ce projet a été développé par Robin.LT(rle-thie) et Louis.D(ldevy).
 
 ## Description d'un serveur IRC
 
