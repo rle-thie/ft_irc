@@ -1,7 +1,6 @@
 # Projet Server IRC 42
 
 Ce projet est un serveur IRC basique qui permet aux utilisateurs de communiquer en temps réel via Internet en utilisant le protocole Internet Relay Chat (IRC).
-Ce projet a été développé par Robin.LT(rle-thie) et Louis.D(ldevy).
 
 ## Description d'un serveur IRC
 
@@ -70,3 +69,5 @@ Voici comment lancer le programme :
 6. Suivez les instructions de votre client IRC pour choisir un pseudonyme (nick), rejoindre des canaux de discussion et commencer à communiquer avec d'autres utilisateurs.
 
 Voilà, vous êtes prêt à utiliser votre serveur IRC!
+
+Ce projet a été développé par Robin.LT(rle-thie) et Louis.D(ldevy).
